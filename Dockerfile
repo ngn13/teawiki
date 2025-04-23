@@ -1,6 +1,6 @@
 FROM golang:1.24.0-alpine as builder
 
-RUN apt add sassc make
+RUN apk add sassc make
 
 WORKDIR /src
 
