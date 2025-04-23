@@ -1,10 +1,11 @@
-name: Build and publish docker image
+name: Docker
 
 on:
   push:
     branches:
       - 'main'
     paths-ignore:
+      - ".github/workflows/test.yml"
       - "README.md"
       - "LICENSE.txt"
 

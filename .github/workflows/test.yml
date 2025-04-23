@@ -1,4 +1,4 @@
-name: Run tests
+name: Tests
 
 on:
   push:
@@ -38,16 +38,16 @@ jobs:
         run: make
 
       - name: 'History test'
-        run: tests/run.sh history
+        run: PATH=~/.cargo/bin/:$PATH tests/run.sh history
 
       - name: 'Latest test'
-        run: tests/run.sh latest
+        run: PATH=~/.cargo/bin/:$PATH tests/run.sh latest
 
       - name: 'List test'
-        run: tests/run.sh list
+        run: PATH=~/.cargo/bin/:$PATH tests/run.sh list
 
       - name: 'Search test'
-        run: tests/run.sh search
+        run: PATH=~/.cargo/bin/:$PATH tests/run.sh search
 
       - name: 'Webhook test'
-        run: tests/run.sh webhook
+        run: PATH=~/.cargo/bin/:$PATH tests/run.sh webhook
