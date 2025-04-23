@@ -1,9 +1,11 @@
-<h1 align="center">
-  <img width="640px" src="assets/showcase.png">
-  </br>
-  teawiki | simple git based wiki
-</h1>
+# teawiki | simple git based wiki
+
+![](https://img.shields.io/github/actions/workflow/status/ngn13/teawiki/test.yml?label=tests)
+![](https://img.shields.io/github/actions/workflow/status/ngn13/teawiki/docker.yml?label=build)
+
 a simple HTTP web application that let's you create wikis using git and markdown
+
+![](assets/showcase.png)
 
 i created this program for my own wiki, so i specifically designed it around my
 personal needs, however it's easily configurable, so feel free to use it if it

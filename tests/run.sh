@@ -7,6 +7,18 @@
 
 source tests/common.sh
 
+depends=(
+  curl
+  git
+  htmlq
+)
+
+for depend in "${depends[@]}"; do
+  command -v "${depend}" &> /dev/null && continue
+  echo "${depend} not found"
+  exit
+done
+
 run() {
   ./"${1}"
 
@@ -32,7 +44,7 @@ fi
 export TW_REPO_PATH="."
 export TW_WEBHOOK_SOURCE="gitea"
 export TW_WEBHOOK_SECRET="${webhook_secret}"
-./teawiki.elf &> /dev/null &
+./teawiki.elf &
 sleep 3
 
 if [[ "200" != "$(curl -s "${url}" -o /dev/null -w '%{http_code}')" ]]; then
