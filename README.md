@@ -56,8 +56,8 @@ above, because i won't, or if you implement it yourself, don't create PR to
 merge it, but other issues and PRs are welcome
 
 ## installation
-best way to use teawiki is to use docker compose, this is intended and best
-deployment option
+best way to use teawiki is to use docker compose, this is the best and the
+*intended* deployment option
 
 an [example compose file](compose.example.yml) can be found in the repo, copy
 this and modify it for your needs
@@ -182,8 +182,8 @@ and that's it
 all the pages in your wiki should have a `.md` extension, otherwise they won't
 be served as page, instead they will be served a static file
 
-each has two sections, metadata (written in markdown) and content (written with
-markdown) and these sections are separated by `---`
+each page have two sections, metadata (written in YAML) and content (written
+in markdown) and these sections are separated by `---`
 
 #### metadata
 this section requires a `title` key, if this key does not exist, the page won't
@@ -223,7 +223,7 @@ headers using `[Header name](#header-name)` syntax
 - `README.md`: if a directory has a `README.md` page, it will be visible in the
 page listing, and it will be displayed as the default page when the user
 switches to that directory, if you add `README.md` page to repo's root
-(`/README.md`) it will be the default index/home page
+(`/README.md`) it will be the index/home page
 
 - `/LICENSE.md`: if you create a `LICENSE.md` in the root of the repo, it will
 be linked in the navigation bar, so users will be able easily access the license
