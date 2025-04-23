@@ -1,5 +1,7 @@
 FROM golang:1.24.0 as builder
 
+RUN apk add sassc make
+
 WORKDIR /src
 
 COPY *.mod    ./
