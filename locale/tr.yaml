@@ -1,0 +1,52 @@
+nav:
+  showbar: kenar çubuğu
+  view: görüntüle
+  history: geçmiş
+  source: kaynak
+  index: anasayfa
+  license: lisans
+
+footer:
+  powered: teawiki ile çalışıyor
+
+sidebar:
+  search:
+    title: ara
+    input: "{{.a0}} üzerinde ara"
+    submit: ara
+  latest: yeni sayfalar
+  list: "{{.a0}} içindeki sayfalar"
+
+search:
+  count: "{{.a0}} sonuç listeleniyor"
+  none: Sonuç bulunamadı
+  empty: Aradığınız terim için herhangi bir sonuç bulunamadı
+
+history:
+  title: "{{.a0}} için commit geçmişi"
+  commit: Commit
+  message: Mesaj
+  author: Yazan
+  time: Zaman
+  more: daha fazla görüntüle
+
+index:
+  title: Teawiki'ye hoş geldiniz!
+  content: "Bu varsayılan anasayfa. Bu sayfayı değiştirmek için README.md içinde
+    bir sayfa oluşturun.\n\nDaha fazla bilgi için [proje README]({{.a0}})'sini
+    inceleyin.\n\nTeawiki kullandığınız için teşekkürler!"
+
+error:
+  404:
+    title: Sayfa bulunamadı
+    desc: Aradığınız sayfa bulunamadı
+    create: "Bu sayfayı {{.a0}} içinde oluşturabilirsiniz"
+
+  400:
+    title: Hatalı istek
+    desc: Web sunucusuna geçersiz bir istek gönderdiniz
+
+  unknown:
+    title: Bilinmeyen hata
+    desc: "Aradığınız sayfayı ararken web sunucusu bilinmeyen bir hata ile
+      karşılaştı."

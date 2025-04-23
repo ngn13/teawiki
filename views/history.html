@@ -1,0 +1,41 @@
+<html>
+  <head>
+    {{template "parts/head" .}}
+    <link href="/_/css/history.css" rel="stylesheet">
+  </head>
+  <body>
+    {{template "parts/navbar" .}}
+    <main>
+      {{template "parts/sidebar" .}}
+      <div class="content md">
+        <h3>{{l "history.title" .path}}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>{{l "history.commit"}}</th>
+              <th>{{l "history.message"}}</th>
+              <th>{{l "history.author"}}</th>
+              <th>{{l "history.time"}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{range .history}}
+              <tr>
+                <td>{{first .Commit 7}}</td>
+                <td>{{.Message}}</td>
+                <td>{{.Author}}</td>
+                <td>{{timestr .Time}}</td>
+              </tr>
+            {{end}}
+          </tbody>
+        </table>
+        {{if .more}}
+          <a
+            href='{{ join "/_/history" .path}}?n={{len (printf "a%*s" .n "")}}'
+          >{{l "history.more"}}</a>
+        {{end}}
+      </div>
+    </main>
+    {{template "parts/footer" .}}
+  </body>
+</html>

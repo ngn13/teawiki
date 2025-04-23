@@ -1,0 +1,18 @@
+.content {
+  table {
+    display: table;
+    width: 100%;
+  }
+
+  table th, table td{
+    text-align: left;
+  }
+
+  h3:first-child{
+    margin-top: 0;
+  }
+
+  table:last-child {
+    margin-bottom: 0;
+  }
+}

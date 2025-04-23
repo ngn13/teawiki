@@ -1,0 +1,41 @@
+name: Build and publish docker image
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths-ignore:
+      - "README.md"
+      - "LICENSE.txt"
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE: ${{github.repository}}
+
+jobs:
+  push-image:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: 'Login to GitHub Container Registry'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: 'Build Inventory Image'
+        run: |
+          version="$(git rev-parse --short HEAD)"
+          docker build . \
+            --tag ${{env.REGISTRY}}/${{env.IMAGE}}:latest \
+            --tag ${{env.REGISTRY}}/${{env.IMAGE}}:$version
+          docker push ${{env.REGISTRY}}/${{env.IMAGE}}:$version
+          docker push ${{env.REGISTRY}}/${{env.IMAGE}}:latest

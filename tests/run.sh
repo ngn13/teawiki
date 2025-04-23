@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# this script runs all the other test scripts after starting
+# the wiki in the background, and checks all of their results
+
+# do not run this script directly, instead run "make test"
+
+source tests/common.sh
+
+run() {
+  ./"${1}"
+
+  if [ $? -eq 0 ]; then
+    echo "$(basename "${script}"): OK"
+  else
+    echo "$(basename "${script}"): FAIL"
+    ret=1
+  fi
+}
+
+script=""
+ret=0
+
+if [ $# -eq 1 ]; then
+  script="tests/test-${1}.sh"
+  if [ ! -f "${script}" ]; then
+    echo "test script not found"
+    exit 1
+  fi
+fi
+
+export TW_REPO_PATH="."
+export TW_WEBHOOK_SOURCE="gitea"
+export TW_WEBHOOK_SECRET="${webhook_secret}"
+./teawiki.elf &> /dev/null &
+sleep 3
+
+if [[ "200" != "$(curl -s "${url}" -o /dev/null -w '%{http_code}')" ]]; then
+  echo "server did not respond with 200"
+  ret=1
+elif [ ! -z "${script}" ]; then
+  run "${script}"
+else
+  for script in tests/test-*.sh; do
+    run "${script}"
+  done
+fi
+
+killall -9 teawiki.elf
+exit $ret

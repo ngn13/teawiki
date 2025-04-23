@@ -1,0 +1,74 @@
+services:
+  teawiki:
+    container_name: teawiki
+    image: ghcr.io/ngn13/teawiki:latest
+    ports:
+    - 8080:8080
+    # uncomment this to only expose the server to the local interface if you
+    # are planning to use a reverse proxy such as nginx
+    #- 127.0.0.1:8080:8080
+    environment:
+      # environment variables are used to configure the application, to see all
+      # the information about different options, see the configuration section
+      # of the README.md file
+
+      # host to listen on
+      TW_LISTEN: "0.0.0.0:8080"
+
+      # name, description and keywords for your wiki, these will displayed in
+      # HTML title and in the meta elements
+      #TW_NAME: "my wiki"
+      #TW_DESC: "my personal wiki"
+      #TW_KEYWORDS: "wiki,tech,computers"
+
+      # URLs for the web interface that can be used to view the source code and
+      # the commits
+      #TW_SOURCE_URL: "https://github.com/example/wiki/tree/main"
+      #TW_COMMIT_URL: "https://github.com/example/wiki/commit"
+
+      # path and the URL for your wiki's git repo, if you don't have your wiki
+      # in a remote server, mount the git repo to the path specified by
+      # TW_REPO_PATH, by default this is set to "/tw/source"
+      #TW_REPO_PATH: "./source"
+      #TW_REPO_URL: "https://github.com/example/wiki"
+
+      # interval for pulling the git repo from TW_REPO_URL to keep the content
+      # sycned with the repo, by default it's set to 30 minutes
+      #TW_PULL_INTERVAL: "30m"
+
+      # source and URL for the webhook, see the webhook setup section of the
+      # README for more info
+      #TW_WEBHOOK_SOURCE: "gitea"
+      #TW_WEBHOOK_SECRET: "topsecret"
+
+      # style for the chroma syntax highlighter and the theme for the web
+      # application
+      #TW_CHROMA_STYLE: "rrt"
+      #TW_THEME: "my_theme"
+
+      # language for the web application and the date and time format
+      #TW_LANG: "en"
+      #TW_TIME: "02/01/06 15:04:05 GMT-07"
+
+      # name of the logo and the icon file for the web application
+      #TW_LOGO: "my_logo.png"
+      #TW_ICON: "my_icon.svg"
+
+    #volumes:
+      # mounting a local repo (no need if you are using a remote repo with
+      # TW_REPO_URL)
+      #- ./repo:/tw/source
+
+      # mounting a custom theme
+      #- ./my_theme.css:/tw/static/themes/:ro
+
+      # mounting custom assets (logo and icon)
+      #- ./my_logo.png:/tw/static/assets/:ro
+      #- ./my_icon.svg:/tw/static/assets/:ro
+
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+

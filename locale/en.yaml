@@ -1,0 +1,52 @@
+nav:
+  showbar: sidebar
+  view: view
+  history: history
+  source: source
+  index: index
+  license: license
+
+footer:
+  powered: powered by teawiki
+
+sidebar:
+  search:
+    title: search
+    input: "search in {{.a0}}"
+    submit: search
+  latest: recent pages
+  list: "pages in {{.a0}}"
+
+search:
+  count: "Listing {{.a0}} results"
+  none: No results
+  empty: There are no results for the term you have searched
+
+history:
+  title: "Commit history for {{.a0}}"
+  commit: Commit
+  message: Message
+  author: Author
+  time: Time
+  more: view more
+
+index:
+  title: Welcome to teawiki!
+  content: "This the default index page. Create a page in the README.md file to
+    change this page.\n\nSee the [project README]({{.a0}}) for more information.
+    \n\nThank you for using teawiki!"
+
+error:
+  404:
+    title: Page not found
+    desc: The page you are looking for is not found
+    create: "You can create this page in {{.a0}}"
+
+  400:
+    title: Bad request
+    desc: You sent an invalid request to the web server
+
+  unknown:
+    title: Unknown error
+    desc: "The server encountered an unknown error while looking for the page
+      you requested"

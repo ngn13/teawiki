@@ -1,0 +1,27 @@
+<nav>
+  <button class="link" id="showbar">{{l "nav.showbar"}}</button>
+  <div class="links">
+    {{ if and .page .page.HasHistory }}
+      {{if .page_view}}
+        <a href='{{ join "/_/history" .path}}'>{{ l "nav.history" }}</a>
+      {{end}}
+
+      {{if .history_view}}
+        <a href='{{.path}}'>{{ l "nav.view" }}</a>
+      {{end}}
+
+      {{if .conf.SourceUrl}}
+        {{if .history_view}}
+          <a href="{{ urljoin .conf.CommitUrl .path}}">{{ l "nav.source" }}</a>
+        {{else if .page_view}}
+          <a href="{{ urljoin .conf.SoruceUrl .path}}">{{ l "nav.source" }}</a>
+        {{end}}
+      {{end}}
+    {{end}}
+
+    <a href="/">{{ l "nav.index" }}</a>
+    {{ if .repo.License}}
+      <a href="/LICENSE">{{ l "nav.license" }}</a>
+    {{end}}
+  </div>
+</nav>

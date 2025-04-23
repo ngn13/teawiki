@@ -1,0 +1,26 @@
+<html>
+  <head>
+    {{template "parts/head" .}}
+    <link href="/_/css/search.css" rel="stylesheet">
+  </head>
+  <body>
+    {{template "parts/navbar" .}}
+    <main>
+      {{template "parts/sidebar" .}}
+      <div class="content md">
+        {{if .results}}
+          <h3>{{l "search.count" .count}}</h3>
+          <ul>
+            {{range $path, $page := .results}}
+              <li><a href="{{$path}}">{{$page.Title}}</a></li>
+            {{end}}
+          </ul>
+        {{else}}
+          <h3>{{l "search.none"}}</h3>
+          <p>{{l "search.empty"}}</p>
+        {{end}}
+      </div>
+    </main>
+    {{template "parts/footer" .}}
+  </body>
+</html>

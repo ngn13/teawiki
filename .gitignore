@@ -1,0 +1,5 @@
+static/css/*.css
+*.elf
+source
+docker-compose.yml
+compose.yml

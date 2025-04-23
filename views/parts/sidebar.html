@@ -1,0 +1,47 @@
+<div id="sidebar">
+  {{if .conf.Logo}}
+    <img src="/_/assets/{{.conf.Logo}}">
+  {{end}}
+
+  <div class="search">
+    <span>{{l "sidebar.search.title"}}</span>
+    <form action="/_/search" method="post">
+      <input
+        name="term"
+        type="text"
+        placeholder='{{l "sidebar.search.input" .conf.Name}}'
+      >
+      <button type="submit">{{l "sidebar.search.submit"}}</button>
+    </form>
+  </div>
+
+  <div class="latest">
+    <span>{{l "sidebar.latest"}}</span>
+    <div>
+      {{range .repo.Latest}}
+        {{if eq $.path .}}
+          <a class="active" href="{{.}}">{{($.repo.Get .).Title}}</a>
+        {{else}}
+          <a href="{{.}}">{{($.repo.Get .).Title}}</a>
+        {{end}}
+      {{end}}
+    </div>
+  </div>
+
+  {{$list := .repo.List .dir}}
+  {{if $list}}
+    <div class="list">
+      <span>{{l "sidebar.list" .dir}}</span>
+      <div>
+        {{range $list}}
+          {{if eq . $.path}}
+            <a class="active" href="{{.}}">{{base .}}</a>
+          {{else}}
+            <a href="{{.}}">{{base .}}</a>
+          {{end}}
+        {{end}}
+      </div>
+    </div>
+  {{end}}
+</div>
+<script src="/_/js/sidebar.js"></script>

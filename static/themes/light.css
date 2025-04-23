@@ -1,0 +1,12 @@
+:root {
+  --theme-1: #f03c2e;
+  --theme-2: #ef9892;
+  --theme-3: #dddbdb;
+
+  --background-1: #fff;
+  --background-2: #eee;
+  --background-3: rgba(170, 170, 170, 0.5);
+
+  --border: #aaa;
+  --text: #111;
+}

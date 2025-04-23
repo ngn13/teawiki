@@ -1,0 +1,25 @@
+{{if .page}}
+  <title>{{ .page.Title }} - {{ .conf.Name }}</title>
+{{else}}
+  <title>{{ .conf.Name }}</title>
+{{end}}
+
+<meta name="viewport" content="width=1024">
+<meta name="description" content="{{.conf.Desc}}">
+{{if .conf.Keywords}}
+  <meta name="keywords" content="{{.conf.Keywords}}">
+{{end}}
+{{if eq .conf.Theme "dark"}}
+  <meta name="color-scheme" content="only dark" />
+{{else if eq .conf.Theme "light"}}
+  <meta name="color-scheme" content="only light" />
+{{end}}
+
+{{if .conf.Icon}}
+  <link rel="icon" href="/_/assets/{{.conf.Icon}}">
+{{else}}
+  <link rel="icon" href="data:;base64,=">
+{{end}}
+
+<link rel="stylesheet" href="/_/themes/{{.conf.Theme}}.css"/>
+<link rel="stylesheet" href="/_/css/style.css"/>

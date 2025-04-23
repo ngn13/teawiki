@@ -1,0 +1,471 @@
+/*
+
+ * this stylesheet contains styles for HTML elements that are
+ * used in every page, so it's imported by all of the pages
+
+ * here's the layout used:
+ * ,______________,
+ * |    navbar    |
+ * |--------------|
+ * | s | content  |
+ * | i |          |
+ * | d |          |
+ * | e |          |
+ * | b |          |
+ * | a |          |
+ * | r |          |
+ * |--------------|
+ * |    footer    |
+ * '--------------'
+
+*/
+
+*{
+  margin: 0;
+  padding: 0;
+  color: var(--text);
+}
+
+::selection {
+  background: var(--background-3);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  background: var(--background-1);
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+// navigation bar & footer
+nav, footer {
+  box-sizing: border-box;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+}
+
+// navigation bar
+nav {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+
+  #showbar {
+    display: none;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+  }
+}
+
+// footer
+footer {
+  flex-direction: row;
+  justify-content: end;
+}
+
+footer {
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+// main page layout
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items:  start;
+  justify-content: start;
+  gap: 10px;
+}
+
+// links
+a, .link {
+  background: none;
+  outline: none;
+  border: none;
+
+  font-size: 15px;
+  color: var(--theme-1);
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// sidebar
+#sidebar {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .search, .latest, .list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+    width: 100%;
+
+    span  {
+      font-size: 15px;
+      padding-left: 10px;
+    }
+
+    form, div {
+      border: solid 1px var(--border);
+      border-left: none;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: start;
+      justify-content: center;
+    }
+  }
+
+  .latest, .list {
+    div {
+      box-sizing: border-box;
+      padding: 10px 0 10px 0;
+    }
+
+    a {
+      box-sizing: border-box;
+      padding: 2px 2px 2px 10px;
+      width: 100%;
+
+      &:hover {
+        background: var(--background-3);
+        text-decoration: none;
+      }
+    }
+
+    .active {
+      background: var(--background-2);
+    }
+  }
+
+  .search {
+    form {
+      box-sizing: border-box;
+      padding: 10px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input, button {
+      border: solid 1px var(--border);
+      outline: none;
+
+      padding: 2px;
+      width: 10.9em;
+      font-size: 95%;
+
+      background: var(--background-1);
+
+      &:hover, &:active, &:focus {
+        border: solid 1px var(--border);
+        background: var(--background-2);
+      }
+    }
+
+    input {
+      margin-bottom: 5px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #sidebar {
+    display: none;
+    position: absolute;
+    background: var(--background-1);
+    padding: 15px 15px 15px 0;
+    border: solid 1px var(--border);
+  }
+
+  nav {
+    flex-direction: row;
+
+    #showbar {
+      display: block;
+    }
+  }
+}
+
+// actual page content
+.content {
+  min-width: 0;
+  flex: 1;
+
+  border: solid 1px var(--border);
+  border-right: none;
+
+  box-sizing: border-box;
+  padding: 15px;
+
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+/*
+
+ * markdown styling is uses modified CSS code from github-markdown-css
+ * see https://github.com/sindresorhus/github-markdown-css
+
+*/
+.md {
+  line-height: 1.5;
+
+  h1,h2,h3,h4,h5,h6 {
+    margin-top: 1.5rem;
+    margin-bottom: .6rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  h1 {
+    font-weight: 600;
+    font-size: 2em;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-weight: 600;
+    font-size: 1.25em;
+  }
+
+  h4 {
+    font-weight: 600;
+    font-size: 1em;
+  }
+
+  h5 {
+    font-weight: 600;
+    font-size: .875em;
+  }
+
+  h6 {
+    font-weight: 600;
+    font-size: .85em;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: square;
+  }
+
+  ul,
+  ol {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 1em;
+  }
+
+  ul ul,
+  ul ol,
+  ol ol,
+  ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  ol ol,
+  ul ol {
+    list-style-type: lower-roman;
+  }
+
+  ul ul ol,
+  ul ol ol,
+  ol ul ol,
+  ol ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  li>p {
+    margin-top: 1rem;
+  }
+
+  li+li {
+    margin-top: .20em;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    padding: 0;
+    margin-top: 1rem;
+
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  dl dd {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 10px 10px 10px 12px;
+    border-left: .25em solid var(--theme-1);
+    background: var(--background-2);
+
+    border-radius: 3px;
+    margin-bottom: 10px;
+
+    > *:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  dd {
+    margin-left: 0;
+  }
+
+  tt,code,samp {
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+    font-size: 12px;
+  }
+
+  pre {
+    box-sizing: border-box;
+
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+    font-size: 12px;
+    word-wrap: normal;
+    overflow: auto;
+
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre code, pre tt {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  code, tt {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    white-space: break-spaces;
+    border-radius: 6px;
+    background-color: var(--theme-3);
+  }
+
+  code:has(span) {
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    font-size: 15px;
+  }
+
+  pre:has(span) {
+    padding: 10px;
+  }
+
+  hr {
+    color: var(--border);
+    margin: 10px 0 10px 0;
+  }
+
+  b,strong {
+   font-weight: 600;
+  }
+
+  table,pre,details {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
+    font-variant: tabular-nums;
+  }
+
+  table th {
+    font-weight: 600;
+  }
+
+  table th,table td {
+    padding: 10px;
+    border: 1px solid var(--border);
+  }
+
+  table td>:last-child {
+    margin-bottom: 0;
+  }
+
+  table tr {
+    background-color: var(--background-1);
+    border-top: 1px solid var(--border);
+  }
+
+  //table tr:nth-child(2n),
+  table thead tr {
+    background-color: var(--background-2);
+  }
+
+  table img {
+    background-color: transparent;
+  }
+}

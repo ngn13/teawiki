@@ -1,0 +1,53 @@
+name: Run tests
+
+on:
+  push:
+    paths-ignore:
+      - "README.md"
+      - "LICENSE.txt"
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+
+      - name: 'Setup go'
+        uses: actions/setup-go@v5
+
+      - name: 'Check code formatting'
+        run: test -z $(gofmt -l .)
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+
+      - name: 'Setup go'
+        uses: actions/setup-go@v5
+
+      - name: 'Install depends for tests'
+        run: |
+          sudo apt install -y cargo curl \
+            make openssl awk git
+          cargo install htmlq
+
+      - name: 'Build the app'
+        run: make
+
+      - name: 'History test'
+        run: tests/run.sh history
+
+      - name: 'Latest test'
+        run: tests/run.sh latest
+
+      - name: 'List test'
+        run: tests/run.sh list
+
+      - name: 'Search test'
+        run: tests/run.sh search
+
+      - name: 'Webhook test'
+        run: tests/run.sh webhook

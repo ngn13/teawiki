@@ -1,0 +1,50 @@
+.title {
+  font-weight: 900;
+  font-size: 2em;
+
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+
+.infobox {
+  float: right;
+  clear: right;
+
+  margin: 0 0 10px 10px;
+  border: solid 1px var(--border);
+
+  display: flex;
+  flex-direction: column;
+
+  .name {
+    text-align: center;
+    padding: 5px;
+  }
+
+  img {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  table {
+    border-collapse: collapse;
+    text-align: left;
+
+    th,td {
+      padding: 5px;
+      border: solid 1px var(--border);
+    }
+
+    th {
+      background: var(--theme-2);
+    }
+
+    td {
+      background: var(--theme-3);
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}

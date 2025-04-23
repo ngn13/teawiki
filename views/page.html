@@ -1,0 +1,45 @@
+<html>
+  <head>
+    {{template "parts/head" .}}
+    <link href="/_/css/page.css" rel="stylesheet">
+  </head>
+  <body>
+    {{template "parts/navbar" .}}
+    <main>
+      {{template "parts/sidebar" .}}
+      <div class="content">
+        <h1 class="title">{{.page.Title}}</h1>
+        {{if or .page.Image .page.Fields}}
+        <div class="infobox">
+          <span class="name">{{.page.Title}}</span>
+          {{if .page.Image}}
+            <img src="{{.page.Image}}">
+          {{end}}
+          <table>
+            {{range .page.Fields}}
+              <tr>
+                <th>{{.Name}}</th>
+                {{if .Link}}
+                  <td>
+                  {{if .Value}}
+                    <a href="{{.Link}}">{{.Value}}</a>
+                  {{else}}
+                    <a href="{{.Link}}">{{host .Link}}</a>
+                  {{end}}
+                  </td>
+                {{else}}
+                  <td>{{.Value}}</td>
+                {{end}}
+              </tr>
+            {{end}}
+          </table>
+        </div>
+        {{end}}
+        <div class="md">
+          {{html .page.Content}}
+        </div>
+      </div>
+    </main>
+    {{template "parts/footer" .}}
+  </body>
+</html>
