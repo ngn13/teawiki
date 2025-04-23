@@ -21,20 +21,20 @@ jobs:
 
   tests:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src
     steps:
-      - name: 'Checkout repository'
-        uses: actions/checkout@v4
+      - name: 'Clone repository'
+        run: |
+          git clone https://github.com/${{github.repository}} .
 
       - name: 'Setup go'
         uses: actions/setup-go@v5
 
       - name: 'Install depends for tests'
         run: |
-          sudo apt install -y curl wget \
-            make openssl git sassc
-
-      - name: 'Install htmlq'
-        run: |
+          sudo apt install -y curl wget make openssl sassc
           wget 'https://github.com/mgdm/htmlq/releases/download/v0.4.0/htmlq-x86_64-linux.tar.gz' \
             -O htmlq.tar.gz
           tar xf htmlq.tar.gz
