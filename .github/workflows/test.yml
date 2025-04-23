@@ -30,24 +30,29 @@ jobs:
 
       - name: 'Install depends for tests'
         run: |
-          sudo apt install -y cargo curl \
+          sudo apt install -y curl wget \
             make openssl git sassc
-          cargo install htmlq
+
+      - name: 'Install htmlq'
+        run: |
+          wget 'https://github.com/mgdm/htmlq/releases/download/v0.4.0/htmlq-x86_64-linux.tar.gz' \
+            -O htmlq.tar.gz
+          tar xf htmlq.tar.gz
 
       - name: 'Build the app'
         run: make
 
       - name: 'History test'
-        run: PATH=~/.cargo/bin/:$PATH tests/run.sh history
+        run: PATH=$PWD:$PATH tests/run.sh history
 
       - name: 'Latest test'
-        run: PATH=~/.cargo/bin/:$PATH tests/run.sh latest
+        run: PATH=$PWD:$PATH tests/run.sh latest
 
       - name: 'List test'
-        run: PATH=~/.cargo/bin/:$PATH tests/run.sh list
+        run: PATH=$PWD:$PATH tests/run.sh list
 
       - name: 'Search test'
-        run: PATH=~/.cargo/bin/:$PATH tests/run.sh search
+        run: PATH=$PWD:$PATH tests/run.sh search
 
       - name: 'Webhook test'
-        run: PATH=~/.cargo/bin/:$PATH tests/run.sh webhook
+        run: PATH=$PWD:$PATH tests/run.sh webhook

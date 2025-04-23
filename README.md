@@ -11,6 +11,22 @@ i created this program for my own wiki, so i specifically designed it around my
 personal needs, however it's easily configurable, so feel free to use it if it
 fulfills your needs as well
 
+- [features](#features)
+- [missing features (that other wikis usually have)](#missing-features-that-other-wikis-usually-have)
+- [installation](#installation)
+- [configuration](#configuration)
+    - [webhook setup](#webhook-setup)
+    - [custom themes](#custom-themes)
+    - [custom assets](#custom-assets)
+    - [writing wiki pages](#writing-wiki-pages)
+        - [metadata](#metadata)
+        - [content](#content)
+        - [special pages](#special-pages)
+- [development](#development)
+    - [adding translations](#adding-translations)
+    - [reporting issues](#reporting-issues)
+    - [other contributions](#other-contributions)
+
 ## features
 - free software (free as in freedom)
 - simple and minimal web interface inspired by

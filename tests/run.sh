@@ -58,5 +58,5 @@ else
   done
 fi
 
-killall -9 teawiki.elf
+pkill -9 teawiki.elf
 exit $ret

@@ -8,4 +8,6 @@ history="$(
 )"
 
 [[ "${commits}" == "${history}" ]] && ok
+
+echo "${commits} doesn't match with ${history}"
 fail
