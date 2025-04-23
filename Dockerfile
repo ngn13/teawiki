@@ -1,6 +1,6 @@
 FROM golang:1.24.0 as builder
 
-RUN apk add sassc make
+RUN apt install -y sassc make
 
 WORKDIR /src
 

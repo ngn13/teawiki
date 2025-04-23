@@ -31,7 +31,7 @@ jobs:
       - name: 'Install depends for tests'
         run: |
           sudo apt install -y cargo curl \
-            make openssl git
+            make openssl git sassc
           cargo install htmlq
 
       - name: 'Build the app'
