@@ -1,6 +1,6 @@
-FROM golang:1.24.0 as builder
+FROM golang:1.24.0-alpine as builder
 
-RUN apt install -y sassc make
+RUN apt add sassc make
 
 WORKDIR /src
 
