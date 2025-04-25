@@ -2,7 +2,7 @@
 
 term='bel'
 results="$(
-  curl -s --data-urlencode "term=${term}" "${url}/_/search" | \
+  curl -s --data-urlencode "term=${term}" "${TW_URL}/_/search" | \
   htmlq -a href '.content ul li a'
 )"
 

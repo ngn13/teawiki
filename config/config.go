@@ -11,6 +11,7 @@ import (
 type Config struct {
 	ListenAddr string `ortam:"LISTEN"`
 
+	Url      *url.URL
 	Name     string
 	Desc     string
 	Keywords string
@@ -43,6 +44,7 @@ func Load() (*Config, error) {
 		// default options
 		ListenAddr: "127.0.0.1:8080",
 
+		Url:      nil,
 		Name:     "my wiki",
 		Desc:     "my personal wiki",
 		Keywords: "wiki",
@@ -70,8 +72,8 @@ func Load() (*Config, error) {
 		return nil, err
 	}
 
-	if config.Name == "" || config.Desc == "" || config.ListenAddr == "" ||
-		config.Theme == "" || config.RepoPath == "" {
+	if config.Url == nil || config.Name == "" || config.Desc == "" ||
+		config.ListenAddr == "" || config.Theme == "" || config.RepoPath == "" {
 		return nil, fmt.Errorf(
 			"a required config option is missing, please see the README",
 		)

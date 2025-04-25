@@ -6,7 +6,7 @@ import (
 	"github.com/ngn13/teawiki/util"
 )
 
-func POST_search(c *fiber.Ctx) error {
+func POST_Search(c *fiber.Ctx) error {
 	body := struct {
 		Term string `form:"term"`
 	}{}

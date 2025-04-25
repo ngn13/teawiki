@@ -41,13 +41,14 @@ if [ $# -eq 1 ]; then
   fi
 fi
 
+export TW_URL="http://127.0.0.1:8080"
 export TW_REPO_PATH="."
 export TW_WEBHOOK_SOURCE="gitea"
-export TW_WEBHOOK_SECRET="${webhook_secret}"
+export TW_WEBHOOK_SECRET="topsecret"
 ./teawiki.elf &
 sleep 3
 
-if [[ "200" != "$(curl -s "${url}" -o /dev/null -w '%{http_code}')" ]]; then
+if [[ "200" != "$(curl -s "${TW_URL}" -o /dev/null -w '%{http_code}')" ]]; then
   echo "server did not respond with 200"
   ret=1
 elif [ ! -z "${script}" ]; then

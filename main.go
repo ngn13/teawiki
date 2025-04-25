@@ -68,6 +68,7 @@ func main() {
 		DisableStartupMessage: true,
 	})
 
+	app.Static("/_", "./static")
 	app.Use(func(c *fiber.Ctx) error {
 		c.Locals("reload", reload_chan)
 		c.Locals("config", conf)
@@ -75,17 +76,15 @@ func main() {
 		c.Locals("repo", rep)
 		return c.Next()
 	})
-	app.Get("/robots.txt", func(c *fiber.Ctx) error {
-		return c.SendFile("./static/robots.txt")
-	})
-	app.Static("/_", "./static")
 
 	// routes
 	app.Get("/", routes.GET_Index)
-	app.Post("/_/search", routes.POST_search)
+	app.Get("/robots.txt", routes.GET_Robots)
+	app.Get("/sitemap.xml", routes.GET_Sitemap)
+	app.Post("/_/search", routes.POST_Search)
 	app.Post("/_/webhook", routes.POST_Webhook)
 	app.Get("/_/history/*", routes.GET_History)
-	app.Get("/*", routes.GET_page)
+	app.Get("/*", routes.GET_Page)
 
 	// background thread
 	go func() {
