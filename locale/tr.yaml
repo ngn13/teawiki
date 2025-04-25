@@ -46,7 +46,12 @@ error:
     title: Hatalı istek
     desc: Web sunucusuna geçersiz bir istek gönderdiniz
 
+  500:
+    title: Sunucu hatası
+    desc: "Web sunucusu içsel bir hata ile karşılaştı, eğer sunucunun sahibi
+      iseniz lütfen kayıtları kontrol edip sorunu raporlayın"
+
   unknown:
     title: Bilinmeyen hata
     desc: "Aradığınız sayfayı ararken web sunucusu bilinmeyen bir hata ile
-      karşılaştı."
+      karşılaştı"

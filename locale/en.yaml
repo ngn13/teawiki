@@ -46,6 +46,11 @@ error:
     title: Bad request
     desc: You sent an invalid request to the web server
 
+  500:
+    title: Server error
+    desc: "Web server encountered an internal error, if you are the owner please
+      check your server logs and report the issue"
+
   unknown:
     title: Unknown error
     desc: "The server encountered an unknown error while looking for the page

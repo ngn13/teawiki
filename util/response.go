@@ -53,7 +53,6 @@ func BadRequest(c *fiber.Ctx, data ...fiber.Map) error {
 }
 
 func ServerError(c *fiber.Ctx, data ...fiber.Map) error {
-	// TODO: also handle 500 in the error template
 	return render(c, http.StatusInternalServerError, "error", data...)
 }
 
