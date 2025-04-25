@@ -9,11 +9,14 @@ import (
 
 func GET_Robots(c *fiber.Ctx) error {
 	conf := c.Locals("config").(*config.Config)
-	sitemap := conf.Url.JoinPath("sitemap.xml").String()
 
 	robots := "User-agent: *\n"
 	robots += "Disallow: /_/\n"
-	robots += fmt.Sprintf("Sitemap: %s", sitemap)
+
+	if conf.Url != nil {
+		sitemap := conf.Url.JoinPath("sitemap.xml").String()
+		robots += fmt.Sprintf("Sitemap: %s", sitemap)
+	}
 
 	return c.SendString(robots)
 }

@@ -72,8 +72,8 @@ func Load() (*Config, error) {
 		return nil, err
 	}
 
-	if config.Url == nil || config.Name == "" || config.Desc == "" ||
-		config.ListenAddr == "" || config.Theme == "" || config.RepoPath == "" {
+	if config.Name == "" || config.Desc == "" || config.ListenAddr == "" ||
+		 config.Theme == "" || config.RepoPath == "" {
 		return nil, fmt.Errorf(
 			"a required config option is missing, please see the README",
 		)

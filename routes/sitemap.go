@@ -29,7 +29,7 @@ type Urlset struct {
 	Urls    []Url
 }
 
-func (s *Urlset) AddUrl(url string, mod *time.Time, _prio ...string) {
+func (s *Urlset) Add(url string, mod *time.Time, _prio ...string) {
 	prio := ""
 	lastmod := ""
 
@@ -52,15 +52,19 @@ func GET_Sitemap(c *fiber.Ctx) error {
 	conf := c.Locals("config").(*config.Config)
 	rep := c.Locals("repo").(*repo.Repo)
 
+	if conf.Url == nil {
+		return util.NotFound(c)
+	}
+
 	set := Urlset{
 		Xmlns: SITEMAP_URL,
 		Urls:  []Url{},
 	}
 
 	if rep.Index.HasHistory {
-		set.AddUrl(conf.Url.String(), &rep.Index.LastUpdate, "1.0")
+		set.Add(conf.Url.String(), &rep.Index.LastUpdate, "1.0")
 	} else {
-		set.AddUrl(conf.Url.String(), nil, "1.0")
+		set.Add(conf.Url.String(), nil, "1.0")
 	}
 
 	for path, page := range rep.Pages {
@@ -69,7 +73,7 @@ func GET_Sitemap(c *fiber.Ctx) error {
 		}
 
 		fp := conf.Url.JoinPath(path).String()
-		set.AddUrl(fp, &page.LastUpdate)
+		set.Add(fp, &page.LastUpdate)
 	}
 
 	body, err := xml.MarshalIndent(set, "", "  ")
