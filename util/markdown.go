@@ -1,4 +1,4 @@
-package markdown
+package util
 
 import (
 	"io"
@@ -19,7 +19,7 @@ type Markdown struct {
 	Extensions bf.Extensions
 }
 
-func New(style string) *Markdown {
+func NewMd(style string) *Markdown {
 	md := &Markdown{
 		Formatter: html.New(),
 		Style:     styles.Get(style),
