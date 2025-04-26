@@ -44,7 +44,7 @@ func main() {
 
 	// setup channels for background thread
 	signal_chan := make(chan os.Signal, 1)
-	reload_timer := time.NewTicker(conf.PullInterval)
+	reload_timer := time.NewTicker(conf.ReloadInterval)
 	reload_chan := make(chan bool)
 
 	signal.Notify(signal_chan, os.Interrupt)
@@ -82,7 +82,7 @@ func main() {
 	app.Get("/robots.txt", routes.GET_Robots)
 	app.Get("/sitemap.xml", routes.GET_Sitemap)
 	app.Post("/_/search", routes.POST_Search)
-	app.Post("/_/webhook", routes.POST_Webhook)
+	app.Post("/_/webhook/:platform", routes.POST_Webhook)
 	app.Get("/_/history/*", routes.GET_History)
 	app.Get("/*", routes.GET_Page)
 

@@ -26,8 +26,10 @@ func New(style string) *Markdown {
 		Renderer: bf.NewHTMLRenderer(bf.HTMLRendererParameters{
 			Flags: bf.CommonHTMLFlags,
 		}),
-		Extensions: bf.AutoHeadingIDs | bf.FencedCode |
-			bf.NoEmptyLineBeforeBlock | bf.SpaceHeadings,
+		Extensions: bf.NoIntraEmphasis | bf.Tables |
+			bf.FencedCode | bf.DefinitionLists | bf.Footnotes |
+			bf.Autolink | bf.HeadingIDs | bf.AutoHeadingIDs |
+			bf.BackslashLineBreak,
 	}
 
 	return md

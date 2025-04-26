@@ -43,7 +43,6 @@ fi
 
 export TW_URL="http://127.0.0.1:8080"
 export TW_REPO_PATH="."
-export TW_WEBHOOK_SOURCE="gitea"
 export TW_WEBHOOK_SECRET="topsecret"
 ./teawiki.elf &
 sleep 3

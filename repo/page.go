@@ -56,7 +56,7 @@ func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
 			continue
 		}
 
-		if buff.String() != "\n---\n" {
+		if buff.String() != "\n%%%\n" {
 			continue
 		}
 

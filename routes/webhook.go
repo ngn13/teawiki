@@ -4,6 +4,7 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/ngn13/teawiki/config"
@@ -27,8 +28,13 @@ func handle(c *fiber.Ctx, event string) {
 
 func POST_Webhook(c *fiber.Ctx) error {
 	conf := c.Locals("config").(*config.Config)
+	platform := c.Params("platform")
 
-	switch conf.WebhookSource {
+	if conf.WebhookSecret == "" {
+		return util.NotFound(c)
+	}
+
+	switch strings.ToLower(platform) {
 	case "github":
 		if !verify(c, conf, "x-hub-signature-256") {
 			return util.BadRequest(c)
@@ -43,6 +49,14 @@ func POST_Webhook(c *fiber.Ctx) error {
 		}
 
 		handle(c, c.Get("X-Gitea-Event"))
+		return c.Status(202).SendString("Accepted")
+
+	case "forgejo":
+		if !verify(c, conf, "HTTP_X_FORGEJO_SIGNATURE") {
+			return util.BadRequest(c)
+		}
+
+		handle(c, c.Get("X-Forgejo-Event"))
 		return c.Status(202).SendString("Accepted")
 	}
 

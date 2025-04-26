@@ -9,8 +9,7 @@ services:
     #- 127.0.0.1:8080:8080
     environment:
       # environment variables are used to configure the application, to see all
-      # the information about different options, see the configuration section
-      # of the README.md file
+      # the information about different options, see docs/config.md
 
       # host to listen on
       TW_LISTEN: "0.0.0.0:8080"
@@ -36,9 +35,7 @@ services:
       # sycned with the repo, by default it's set to 30 minutes
       #TW_PULL_INTERVAL: "30m"
 
-      # source and URL for the webhook, see the webhook setup section of the
-      # README for more info
-      #TW_WEBHOOK_SOURCE: "gitea"
+      # secret for the webhook, see the docs/webhook.md for more information
       #TW_WEBHOOK_SECRET: "topsecret"
 
       # style for the chroma syntax highlighter and the theme for the web

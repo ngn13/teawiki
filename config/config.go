@@ -19,12 +19,11 @@ type Config struct {
 	SourceUrl *url.URL
 	CommitUrl *url.URL
 
-	RepoUrl      *url.URL
-	RepoPath     string
-	PullInterval time.Duration
+	RepoUrl  *url.URL
+	RepoPath string
 
-	WebhookSource string
-	WebhookSecret string
+	ReloadInterval time.Duration
+	WebhookSecret  string
 
 	ChromaStyle string `ortam:"CHROMA"`
 	Theme       string
@@ -52,14 +51,13 @@ func Load() (*Config, error) {
 		SourceUrl: nil,
 		CommitUrl: nil,
 
-		RepoPath:     "./source",
-		RepoUrl:      nil,
-		PullInterval: time.Minute * 30,
+		RepoPath: "./source",
+		RepoUrl:  nil,
 
-		WebhookSource: "",
-		WebhookSecret: "",
+		ReloadInterval: time.Minute * 30,
+		WebhookSecret:  "",
 
-		ChromaStyle: "rrt",
+		ChromaStyle: "",
 		Theme:       "dark",
 		Lang:        "en",
 		Time:        "02/01/06 15:04:05 GMT-07",
@@ -75,8 +73,22 @@ func Load() (*Config, error) {
 	if config.Name == "" || config.Desc == "" || config.ListenAddr == "" ||
 		config.Theme == "" || config.RepoPath == "" {
 		return nil, fmt.Errorf(
-			"a required config option is missing, please see the README",
+			"a required configuration option is missing, please see docs/config.md",
 		)
+	}
+
+	if config.ReloadInterval == 0 {
+		return nil, fmt.Errorf("reload interval should be non-zero")
+	}
+
+	if config.ChromaStyle == "" {
+		switch config.ChromaStyle {
+		case "dark":
+			config.ChromaStyle = "rrt"
+
+		case "light":
+			config.ChromaStyle = "emacs"
+		}
 	}
 
 	return &config, nil

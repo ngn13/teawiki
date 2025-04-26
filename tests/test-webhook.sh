@@ -7,7 +7,7 @@ sign="$(
   awk '{print $2}'
 )"
 
-code=$(curl -s "${TW_URL}/_/webhook" \
+code=$(curl -s "${TW_URL}/_/webhook/gitea" \
   -X POST --data "${body}" \
   -H 'Content-Type: application/json' \
   -H 'X-Gitea-Event: push' \
