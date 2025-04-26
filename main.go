@@ -51,6 +51,7 @@ func main() {
 	defer reload_timer.Stop()
 
 	engine := html.New("./views", ".html")
+	engine.AddFunc("sanitize", util.Sanitize)
 	engine.AddFunc("urljoin", util.UrlJoin)
 	engine.AddFunc("timestr", conf.TimeStr)
 	engine.AddFunc("host", util.Host)

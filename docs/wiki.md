@@ -40,7 +40,7 @@ this looks like:
 
 lastly you can use the `fields` key to create an infobox with custom key-value
 paired fields:
-```
+```yaml
 ...
 fields:
     - name: launched
@@ -51,7 +51,7 @@ fields:
 ...
 ```
 you can also add links using to these fields:
-```
+```yaml
 ...
     - name: predecessor
       value: Intel 80286
@@ -82,15 +82,16 @@ multiple extensions that are enabled:
 - **backslash line breaks**: converts trailing backslashes to line breaks
 
 please note that these extensions are not part of the
-[CommonMark](https://commonmark.org/) standard, you should avoid using these if
-you want your wiki to stay compatible with other markdown renderers
+[CommonMark standart](https://commonmark.org/), you should avoid using these if
+you want your wiki to stay compatible with other markdown processors
 
 ## special pages
 some pages have special uses in the wiki, the most important one is the
 `README.md` page
 
 if you create a page in the `README.md` file, this page will be used as the
-default/index page for whatever directory it's in
+default/index page for whatever directory it's in, and the directory will be
+visible in the page listing section of the sidebar
 
 for example, if you create a page in `/README.md`, that will be the index page
 for your wiki and it will be displayed whenever users visit `/`

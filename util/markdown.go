@@ -100,10 +100,12 @@ func (md *Markdown) RenderFooter(w io.Writer, ast *bf.Node) {
 }
 
 func (md *Markdown) Render(r io.Reader) []byte {
-	if content, err := io.ReadAll(r); err != nil {
+	content, err := io.ReadAll(r)
+	if err != nil {
 		return nil
-	} else {
-		return bf.Run(
-			content, bf.WithRenderer(md), bf.WithExtensions(md.Extensions))
 	}
+
+	return SanitizeBytes(
+		bf.Run(content, bf.WithRenderer(md), bf.WithExtensions(md.Extensions)),
+	)
 }
