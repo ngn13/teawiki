@@ -1,4 +1,4 @@
-package markdown
+package util
 
 import (
 	"io"
@@ -19,15 +19,17 @@ type Markdown struct {
 	Extensions bf.Extensions
 }
 
-func New(style string) *Markdown {
+func NewMd(style string) *Markdown {
 	md := &Markdown{
 		Formatter: html.New(),
 		Style:     styles.Get(style),
 		Renderer: bf.NewHTMLRenderer(bf.HTMLRendererParameters{
 			Flags: bf.CommonHTMLFlags,
 		}),
-		Extensions: bf.AutoHeadingIDs | bf.FencedCode |
-			bf.NoEmptyLineBeforeBlock | bf.SpaceHeadings,
+		Extensions: bf.NoIntraEmphasis | bf.Tables |
+			bf.FencedCode | bf.DefinitionLists | bf.Footnotes |
+			bf.Autolink | bf.HeadingIDs | bf.AutoHeadingIDs |
+			bf.BackslashLineBreak,
 	}
 
 	return md
@@ -98,10 +100,10 @@ func (md *Markdown) RenderFooter(w io.Writer, ast *bf.Node) {
 }
 
 func (md *Markdown) Render(r io.Reader) []byte {
-	if content, err := io.ReadAll(r); err != nil {
+	content, err := io.ReadAll(r)
+	if err != nil {
 		return nil
-	} else {
-		return bf.Run(
-			content, bf.WithRenderer(md), bf.WithExtensions(md.Extensions))
 	}
+
+	return bf.Run(content, bf.WithRenderer(md), bf.WithExtensions(md.Extensions))
 }

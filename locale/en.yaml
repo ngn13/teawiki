@@ -16,6 +16,7 @@ sidebar:
     submit: search
   latest: recent pages
   list: "pages in {{.a0}}"
+  content: content
 
 search:
   count: "Listing {{.a0}} results"
@@ -45,6 +46,11 @@ error:
   400:
     title: Bad request
     desc: You sent an invalid request to the web server
+
+  500:
+    title: Server error
+    desc: "Web server encountered an internal error, if you are the owner please
+      check your server logs and report the issue"
 
   unknown:
     title: Unknown error

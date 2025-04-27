@@ -19,8 +19,9 @@ type Field struct {
 }
 
 type Page struct {
-	HasHistory bool      `yaml:"-"`
-	LastUpdate time.Time `yaml:"-"`
+	HasHistory bool       `yaml:"-"`
+	LastUpdate time.Time  `yaml:"-"`
+	Headings   []*Heading `yaml:"-"`
 
 	// this stuff is parsed from the file
 	Title   string  `yaml:"title"`
@@ -56,7 +57,7 @@ func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
 			continue
 		}
 
-		if buff.String() != "\n---\n" {
+		if buff.String() != "\n%%%\n" {
 			continue
 		}
 
@@ -111,15 +112,21 @@ func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
 		page.LastUpdate = time.Unix(0, 0)
 	}
 
+	// load headings from the parsed markdown
+	page.Headings = Headings(page.Content)
+
 	return page, nil
 }
 
 func (r *Repo) newPage(title string, content string) *Page {
+	html := string(r.Markdown.Render(strings.NewReader(content)))
+
 	return &Page{
 		HasHistory: false,
 		LastUpdate: time.Unix(0, 0),
+		Headings:   Headings(html),
 		Title:      title,
-		Content:    string(r.Markdown.Render(strings.NewReader(content))),
+		Content:    html,
 	}
 }
 

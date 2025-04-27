@@ -17,7 +17,7 @@ func (r *Repo) Resolve(rp string) string {
 
 	base := path.Base(rp)
 
-	if path.Ext(base) == PAGE_EXT {
+	if path.Ext(base) != "" {
 		return rp
 	}
 

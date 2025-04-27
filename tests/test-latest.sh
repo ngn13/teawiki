@@ -12,7 +12,7 @@ for file in $(printf '%s\n' "${files[@]}" | sort -nr | uniq -w 25); do
   sorted+=("$(echo "${file}" | cut -d@ -f2)")
 done
 
-recent="$(curl -s "${url}" | htmlq -a href '.latest div a')"
+recent="$(curl -s "${TW_URL}" | htmlq -a href '.latest div a')"
 prev=0
 
 for file in "${sorted[@]}"; do

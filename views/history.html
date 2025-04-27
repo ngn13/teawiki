@@ -22,8 +22,8 @@
             {{range .history}}
               <tr>
                 <td>{{first .Commit 7}}</td>
-                <td>{{.Message}}</td>
-                <td>{{.Author}}</td>
+                <td>{{sanitize .Message}}</td>
+                <td>{{sanitize .Author}}</td>
                 <td>{{timestr .Time}}</td>
               </tr>
             {{end}}

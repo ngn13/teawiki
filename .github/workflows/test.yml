@@ -25,6 +25,7 @@ jobs:
       - name: 'Clone repository'
         run: |
           git clone https://github.com/${{github.repository}} .
+          git switch ${{ github.head_ref || github.ref_name }}
 
       - name: 'Setup go'
         uses: actions/setup-go@v5
@@ -53,3 +54,9 @@ jobs:
 
       - name: 'Webhook test'
         run: PATH=$PWD:$PATH tests/run.sh webhook
+
+      - name: 'Sitemap test'
+        run: PATH=$PWD:$PATH tests/run.sh sitemap
+
+      - name: 'Headings test'
+        run: PATH=$PWD:$PATH tests/run.sh headings

@@ -44,13 +44,14 @@ func main() {
 
 	// setup channels for background thread
 	signal_chan := make(chan os.Signal, 1)
-	reload_timer := time.NewTicker(conf.PullInterval)
+	reload_timer := time.NewTicker(conf.ReloadInterval)
 	reload_chan := make(chan bool)
 
 	signal.Notify(signal_chan, os.Interrupt)
 	defer reload_timer.Stop()
 
 	engine := html.New("./views", ".html")
+	engine.AddFunc("sanitize", util.Sanitize)
 	engine.AddFunc("urljoin", util.UrlJoin)
 	engine.AddFunc("timestr", conf.TimeStr)
 	engine.AddFunc("host", util.Host)
@@ -68,6 +69,7 @@ func main() {
 		DisableStartupMessage: true,
 	})
 
+	app.Static("/_", "./static")
 	app.Use(func(c *fiber.Ctx) error {
 		c.Locals("reload", reload_chan)
 		c.Locals("config", conf)
@@ -75,17 +77,15 @@ func main() {
 		c.Locals("repo", rep)
 		return c.Next()
 	})
-	app.Get("/robots.txt", func(c *fiber.Ctx) error {
-		return c.SendFile("./static/robots.txt")
-	})
-	app.Static("/_", "./static")
 
 	// routes
 	app.Get("/", routes.GET_Index)
-	app.Post("/_/search", routes.POST_search)
-	app.Post("/_/webhook", routes.POST_Webhook)
+	app.Get("/robots.txt", routes.GET_Robots)
+	app.Get("/sitemap.xml", routes.GET_Sitemap)
+	app.Post("/_/search", routes.POST_Search)
+	app.Post("/_/webhook/:platform", routes.POST_Webhook)
 	app.Get("/_/history/*", routes.GET_History)
-	app.Get("/*", routes.GET_page)
+	app.Get("/*", routes.GET_Page)
 
 	// background thread
 	go func() {

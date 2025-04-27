@@ -9,7 +9,6 @@ import (
 	"github.com/ngn13/teawiki/config"
 	"github.com/ngn13/teawiki/consts"
 	"github.com/ngn13/teawiki/locale"
-	"github.com/ngn13/teawiki/markdown"
 	"github.com/ngn13/teawiki/util"
 )
 
@@ -27,7 +26,7 @@ const (
 type Repo struct {
 	Config   *config.Config
 	Locale   *locale.Locale
-	Markdown *markdown.Markdown
+	Markdown *util.Markdown
 
 	Git  *git.Repository
 	Head *plumbing.Reference
@@ -44,7 +43,7 @@ func New(conf *config.Config, loc *locale.Locale) (*Repo, error) {
 		repo = Repo{
 			Config:   conf,
 			Locale:   loc,
-			Markdown: markdown.New(conf.ChromaStyle),
+			Markdown: util.NewMd(conf.ChromaStyle),
 		}
 		err error
 	)

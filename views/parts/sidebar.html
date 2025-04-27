@@ -43,5 +43,14 @@
       </div>
     </div>
   {{end}}
+
+  {{if .page.Headings}}
+    <div class="headings">
+      <span>{{l "sidebar.content"}}</span>
+      <div class="md">
+        {{template "parts/heading" .page.Headings}}
+      </div>
+    </div>
+  {{end}}
 </div>
 <script src="/_/js/sidebar.js"></script>

@@ -16,6 +16,7 @@ sidebar:
     submit: ara
   latest: yeni sayfalar
   list: "{{.a0}} içindeki sayfalar"
+  content: içerik
 
 search:
   count: "{{.a0}} sonuç listeleniyor"
@@ -46,7 +47,12 @@ error:
     title: Hatalı istek
     desc: Web sunucusuna geçersiz bir istek gönderdiniz
 
+  500:
+    title: Sunucu hatası
+    desc: "Web sunucusu içsel bir hata ile karşılaştı, eğer sunucunun sahibi
+      iseniz lütfen kayıtları kontrol edip sorunu raporlayın"
+
   unknown:
     title: Bilinmeyen hata
     desc: "Aradığınız sayfayı ararken web sunucusu bilinmeyen bir hata ile
-      karşılaştı."
+      karşılaştı"

@@ -6,7 +6,7 @@ import (
 	"github.com/ngn13/teawiki/util"
 )
 
-func GET_page(c *fiber.Ctx) error {
+func GET_Page(c *fiber.Ctx) error {
 	rep := c.Locals("repo").(*repo.Repo)
 
 	path := rep.Resolve(c.Path())

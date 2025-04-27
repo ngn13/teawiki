@@ -52,6 +52,10 @@ func BadRequest(c *fiber.Ctx, data ...fiber.Map) error {
 	return render(c, http.StatusBadRequest, "error", data...)
 }
 
+func ServerError(c *fiber.Ctx, data ...fiber.Map) error {
+	return render(c, http.StatusInternalServerError, "error", data...)
+}
+
 func Send(c *fiber.Ctx, file string) error {
 	conf := c.Locals("config").(*config.Config)
 	fp := path.Join(conf.RepoPath, file)
