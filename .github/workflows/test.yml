@@ -57,3 +57,6 @@ jobs:
 
       - name: 'Sitemap test'
         run: PATH=$PWD:$PATH tests/run.sh sitemap
+
+      - name: 'Headings test'
+        run: PATH=$PWD:$PATH tests/run.sh headings
