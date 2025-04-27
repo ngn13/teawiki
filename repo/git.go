@@ -31,7 +31,8 @@ func (r *Repo) history(file string, start, count int) ([]History, bool, error) {
 		PathFilter: func(p string) bool {
 			return path.Join(r.Config.RepoPath, p) == file
 		},
-		From: r.Head.Hash(),
+		From:  r.Head.Hash(),
+		Order: git.LogOrderCommitterTime,
 	})
 	if err != nil {
 		return nil, false, err
