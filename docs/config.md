@@ -18,7 +18,7 @@ here is a list of all the available options:
 - [`TW_REPO_URL`](#tw_repo_url)
 - [`TW_RELOAD_INTERVAL`](#tw_reload_interval)
 - [`TW_WEBHOOK_SECRET`](#tw_webhook_secret)
-- [`TW_CHROMA_STYLE`](#tw_chroma_style)
+- [`TW_CHROMA`](#tw_chroma)
 - [`TW_THEME` (required)](#tw_theme-required)
 - [`TW_LANG`](#tw_lang)
 - [`TW_TIME`](#tw_time)
@@ -110,7 +110,7 @@ to verify the authenticity of webhook requests
 to learn more about setting up a webhook,
 [see this documentation](/docs/webhook.md)
 
-## `TW_CHROMA_STYLE`
+## `TW_CHROMA`
 style for the [chroma syntax highlighter](https://github.com/alecthomas/chroma),
 check out [Chroma Style Gallery](https://xyproto.github.io/splash/docs/) to view
 the available styles

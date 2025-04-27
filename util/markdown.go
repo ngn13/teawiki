@@ -105,7 +105,5 @@ func (md *Markdown) Render(r io.Reader) []byte {
 		return nil
 	}
 
-	return SanitizeBytes(
-		bf.Run(content, bf.WithRenderer(md), bf.WithExtensions(md.Extensions)),
-	)
+	return bf.Run(content, bf.WithRenderer(md), bf.WithExtensions(md.Extensions))
 }

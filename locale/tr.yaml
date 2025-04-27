@@ -16,6 +16,7 @@ sidebar:
     submit: ara
   latest: yeni sayfalar
   list: "{{.a0}} içindeki sayfalar"
+  content: içerik
 
 search:
   count: "{{.a0}} sonuç listeleniyor"

@@ -40,7 +40,7 @@ services:
 
       # style for the chroma syntax highlighter and the theme for the web
       # application
-      #TW_CHROMA_STYLE: "rrt"
+      #TW_CHROMA: "rrt"
       #TW_THEME: "my_theme"
 
       # language for the web application and the date and time format

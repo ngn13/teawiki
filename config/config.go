@@ -82,7 +82,7 @@ func Load() (*Config, error) {
 	}
 
 	if config.ChromaStyle == "" {
-		switch config.ChromaStyle {
+		switch config.Theme {
 		case "dark":
 			config.ChromaStyle = "rrt"
 

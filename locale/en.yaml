@@ -16,6 +16,7 @@ sidebar:
     submit: search
   latest: recent pages
   list: "pages in {{.a0}}"
+  content: content
 
 search:
   count: "Listing {{.a0}} results"

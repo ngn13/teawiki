@@ -1,0 +1,12 @@
+<ul>
+  {{range .}}
+    <li>
+      {{if .Children}}
+        <a href="#{{.ID}}">{{.Name}}</a>
+        {{template "parts/heading" .Children}}
+      {{else}}
+        <a href="#{{.ID}}">{{.Name}}</a>
+      {{end}}
+    </li>
+  {{end}}
+</ul>

@@ -1,11 +1,11 @@
 :root {
   --theme-1: #f03c2e;
   --theme-2: #ef9892;
-  --theme-3: #dddbdb;
+  --theme-3: #bbb;
 
   --background-1: #fff;
-  --background-2: #eee;
-  --background-3: rgba(170, 170, 170, 0.5);
+  --background-2: #ccc;
+  --background-3: rgba(100, 100, 100, 0.5);
 
   --border: #aaa;
   --text: #111;
