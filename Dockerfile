@@ -16,7 +16,6 @@ COPY config   ./config
 COPY consts   ./consts
 COPY locale   ./locale
 COPY log      ./log
-COPY markdown ./markdown
 COPY repo     ./repo
 COPY routes   ./routes
 COPY static   ./static
