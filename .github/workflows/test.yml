@@ -24,8 +24,8 @@ jobs:
     steps:
       - name: 'Clone repository'
         run: |
-          git clone https://github.com/${{github.repository}} .
-          git switch ${{ github.head_ref || github.ref_name }}
+          git clone https://github.com/${{github.repository}} \
+            -b ${{ github.head_ref || github.ref_name }} .
 
       - name: 'Setup go'
         uses: actions/setup-go@v5
