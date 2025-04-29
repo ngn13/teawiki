@@ -1,6 +1,6 @@
 # teawiki | simple git based wiki
 
-![](https://img.shields.io/github/actions/workflow/status/ngn13/teawiki/testyml?label=tests)
+![](https://img.shields.io/github/actions/workflow/status/ngn13/teawiki/test.yml?label=tests)
 ![](https://img.shields.io/github/actions/workflow/status/ngn13/teawiki/docker.yml?label=build)
 
 a simple HTTP web application that let's you create wikis using git and markdown
