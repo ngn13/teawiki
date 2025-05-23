@@ -51,8 +51,6 @@ provide the webhook secret you saved to teawiki using the `TW_WEBHOOK_SECRET`
 option:
 
 ```yaml
-
----
 environment:
   TW_WEBHOOK_SECRET: "topsecret"
 ```

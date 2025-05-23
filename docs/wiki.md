@@ -35,8 +35,6 @@ another key you can use is the `image` key, which when specified will create an
 example:
 
 ```yaml
-
----
 image: images/i386.jpg
 ```
 
@@ -48,8 +46,6 @@ lastly you can use the `fields` key to create an infobox with custom key-value
 paired fields:
 
 ```yaml
-
----
 fields:
   - name: launched
     value: October 1985
@@ -61,8 +57,6 @@ fields:
 you can also add links using to these fields:
 
 ```yaml
-
----
 - name: predecessor
   value: Intel 80286
   link: i80286.md
@@ -148,8 +142,6 @@ git repo is named `repo` and is located in the same directory with the compose
 file, you can mount it like so:
 
 ```yaml
-
----
 volumes:
   - ./repo:/tw/source:ro
 ```

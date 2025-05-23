@@ -7,14 +7,15 @@ a simple HTTP web application that let's you create wikis using git and markdown
 
 ![](assets/showcase.png)
 
-i created this program for my own wiki, so i specifically designed it around my
-personal needs, however i documented everything as well as i can and tried to
+I created this program for my own wiki, so I specifically designed it around my
+personal needs, however I documented everything as well as I can and tried to
 make everything as much configurable as possible, so you can also use it if it
 fulfills your needs as well
 
 ## features
 
-- free software (free as in freedom)
+- free software (free as in freedom),
+  [learn more](https://www.gnu.org/philosophy/free-sw.en.html)
 - easy installation and configuration with docker compose
 - supports both local and remote git repos
 - simple and minimal web interface inspired by
@@ -32,19 +33,19 @@ fulfills your needs as well
 - no web-based editor/manager
 - not easily extensible (no plugins, extensions etc.)
 
-personally, i don't really care about any of these features, but you might care,
-in this case i suggest you look for an another wiki software (there are
+personally, I don't really care about any of these features, but you might care,
+in this case I suggest you look for an another wiki software (there are
 [plenty](https://awesome-selfhosted.net/tags/wikis.html) of them)
 
 ## installation
 
-to install and run teawiki, i suggest you use docker compose, this is the
+to install and run teawiki, I suggest you use docker compose, this is the
 _intended_ deployment option
 
 an [example compose file](compose.example.yml) can be found in the repo, copy
 this and read the documentation to configure everything properly
 
-i also suggest you use a reverse proxy server instead of directly exposing the
+I also suggest you use a reverse proxy server instead of directly exposing the
 docker container to the internet, so you can configure stuff like SSL, CORS etc.
 
 ## documentation
@@ -57,7 +58,7 @@ docker container to the internet, so you can configure stuff like SSL, CORS etc.
 ## development
 
 for development, clone the repository and switch to `dev` branch, all of your
-pull requests should also this branch
+pull requests should also target this branch
 
 to build the application you'll need GNU make, `go` and the SASS compiler
 `sassc`, after obtaining these, you can build the app by running:
@@ -66,7 +67,7 @@ to build the application you'll need GNU make, `go` and the SASS compiler
 make
 ```
 
-i also wrote few test scripts to make my life easier, to run these you will need
+I also wrote few test scripts to make my life easier, to run these you will need
 `curl`, `openssl` and `htmlq`. After obtaining these tools you can run the tests
 by running:
 
@@ -78,6 +79,20 @@ to build the application in release mode, run:
 
 ```bash
 make RELEASE=1
+```
+
+to check format the code properly, you'll need `gofmt` (part of the go toolkit,
+if you installed `go` you probably already have this) and prettier. After
+obtaining these, you can format the code by running:
+
+```bash
+make format
+```
+
+to check for any formatting errors, you'll also need GNU sed and grep:
+
+```bash
+make check
 ```
 
 ### adding translations
@@ -104,6 +119,7 @@ encountering in detail
 if you are planning to add a new feature, please first create an issue to
 discuss it - you don't need to do this for bug fixes
 
-before creating a pull request make sure you run `make format` to format the
-code correctly, i also suggest you run the tests to make sure that everything is
-working properly
+before creating a pull request make sure you run `make format` and `make check`
+to format the code and check the code for any formatting errors, as described in
+the [development section](##development). I also suggest you run the tests to
+make sure everything is working properly
