@@ -12,6 +12,8 @@ func GET_Page(c *fiber.Ctx) error {
 	path := rep.Resolve(c.Path())
 	page := rep.Get(path)
 
+	// TODO: for directory paths, redirect from "/dir" to "/dir/"
+
 	if page == nil {
 		return util.Send(c, path)
 	}
