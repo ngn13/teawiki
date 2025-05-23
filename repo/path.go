@@ -8,7 +8,7 @@ import (
 	"github.com/ngn13/teawiki/util"
 )
 
-func (r *Repo) Resolve(rp string) string {
+func (r *Repo) Resolve(rp string) (string, bool) {
 	rp = strings.ReplaceAll(rp, "..", "") // yeah nice try
 
 	if rp[0] != '/' {
@@ -18,17 +18,17 @@ func (r *Repo) Resolve(rp string) string {
 	base := path.Base(rp)
 
 	if path.Ext(base) != "" {
-		return rp
+		return rp, false
 	}
 
 	fp := path.Join(r.Config.RepoPath, rp)
 
 	if util.IsDir(fp) {
-		return path.Join(rp, INDEX_NAME)
+		return path.Join(rp, INDEX_NAME), true
 	}
 
 	dir := path.Dir(rp)
-	return path.Join(dir, base+PAGE_EXT)
+	return path.Join(dir, base+PAGE_EXT), false
 }
 
 func (r *Repo) List(dir string) []string {

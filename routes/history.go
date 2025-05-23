@@ -20,7 +20,7 @@ func GET_History(c *fiber.Ctx) error {
 	rep := c.Locals("repo").(*repo.Repo)
 	rp := strings.Replace(c.Path(), "/_/history", "", 1)
 
-	path := rep.Resolve(rp)
+	path, _ := rep.Resolve(rp)
 	page := rep.Get(path)
 
 	if page == nil {
