@@ -351,11 +351,11 @@ a,
 
   // ordered and unordered lists
   ul {
-    list-style: inside square;
+    list-style: outside square;
   }
 
   ol {
-    list-style: inside decimal;
+    list-style: outside decimal;
   }
 
   ul,
@@ -363,25 +363,30 @@ a,
     margin-bottom: 10px;
 
     ul {
-      padding-left: 1em;
-      list-style: inside disc;
+      list-style: outside disc;
     }
 
     ol {
-      padding-left: 1em;
-      list-style: inside lower-alpha;
+      list-style: outside lower-alpha;
     }
 
     li {
+      margin-left: 1em;
+
       &::marker {
         font-weight: 900;
         color: var(--theme-1);
       }
 
+      &:last-child ul,
+      &:last-child ol{
+        margin-bottom: 0;
+      }
+
       ul,
       ol {
-        margin-top: 0.2em;
-        margin-bottom: 0;
+        margin-bottom: .4em;
+        margin-top: .2em;
       }
 
       & > p {

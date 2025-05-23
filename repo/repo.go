@@ -111,7 +111,15 @@ func (r *Repo) Reload() error {
 
 	// sort the paths based on the pages (latest first)
 	sort.Slice(paths, func(i, j int) bool {
-		return r.Pages[paths[i]].LastUpdate.After(r.Pages[paths[j]].LastUpdate)
+		switch r.Pages[paths[i]].LastUpdate.Compare(r.Pages[paths[j]].LastUpdate) {
+		case 0:
+			return r.Pages[paths[j]].Title > r.Pages[paths[i]].Title
+
+		case -1:
+			return false
+		}
+
+		return true
 	})
 
 	// create the latest updated page list
