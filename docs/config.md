@@ -1,4 +1,5 @@
 # configuration
+
 all the configuration is environment variable based, which makes the
 configuration easy for deployment with docker compose
 
@@ -26,11 +27,13 @@ here is a list of all the available options:
 - [`TW_ICON`](#tw_icon)
 
 ## `TW_LISTEN` (required)
+
 host the web server will listen on
 
 default is `127.0.0.1:8080`
 
 ## `TW_URL`
+
 full URL for your wiki
 
 for example if you are hosting your wiki on `wiki.example.com` using HTTPS,
@@ -40,16 +43,19 @@ this option is not required but i highly suggest you set it, as it's required
 for [sitemap](https://www.sitemaps.org/) generation
 
 ## `TW_NAME` (required)
+
 name of the wiki, displayed in the HTML title
 
 default is `my_wiki`
 
 ## `TW_DESC` (required)
+
 a short description for your wiki, displayed in HTML meta elements
 
 default is `my personal wiki`
 
 ## `TW_KEYWORDS`
+
 keywords for your wiki, will be included the in HTML meta elements, split
 multiple words by comma
 
@@ -59,6 +65,7 @@ for example if you wiki is about old audio devices, you may want to set this to
 default is `wiki`
 
 ## `TW_SOURCE_URL`
+
 URL for the web interface that is used to display git repo's source code
 
 for example if your wiki lives in `https://github.com/example/wiki`, and uses
@@ -69,22 +76,26 @@ this URL changes across different git hosting software and it also depends on
 how the software is deployed, this is why it's configurable
 
 ## `TW_COMMIT_URL`
+
 URL for the web interface that is used to display git repo's commits, for
 example if your wiki lives in `https://github.com/example/wiki`, this should be
 set to `https://github.com/example/wiki/commit`
 
 ## `TW_REPO_PATH` (required)
+
 path to the local git repo, no need to modify if you are using a remote repo
 with `TW_REPO_URL`
 
 default is `./source`
 
 ## `TW_REPO_URL`
+
 URL for the remote git repo
 
 if specified, this remote repo will be pulled/cloned to `TW_REPO_PATH`
 
 ## `TW_RELOAD_INTERVAL`
+
 when teawiki starts up, it loads all the pages in memory to speed up rendering
 when a user requests a page
 
@@ -103,14 +114,16 @@ local repo synced with the remote, you should also checkout `TW_WEBHOOK_SECRET`
 to configure a webhook for better and almost instant syncing
 
 ## `TW_WEBHOOK_SECRET`
+
 secret value for the remote git hosting platform's webhook, should be the same
-secret that you use while configuring the webhook, this is used by the server
-to verify the authenticity of webhook requests
+secret that you use while configuring the webhook, this is used by the server to
+verify the authenticity of webhook requests
 
 to learn more about setting up a webhook,
 [see this documentation](/docs/webhook.md)
 
 ## `TW_CHROMA`
+
 style for the [chroma syntax highlighter](https://github.com/alecthomas/chroma),
 check out [Chroma Style Gallery](https://xyproto.github.io/splash/docs/) to view
 the available styles
@@ -121,21 +134,24 @@ are using the light theme, it's set to `emacs`
 see `TW_THEME` to see the theme configuration
 
 ## `TW_THEME` (required)
+
 name of the color theme, `dark` and `light` are the only available themes,
 however [you can also use a custom theme](/docs/custom.md)
 
 default is `dark`
 
 ## `TW_LANG`
+
 language for the web application, currently available languages are:
 
 - English (`en`, default)
 - Turkish (`tr`)
 
-adding your own language is quite simple, see the translation section of
-the [README](/README.md) for more info
+adding your own language is quite simple, see the translation section of the
+[README](/README.md) for more info
 
 ## `TW_TIME`
+
 time format that will be used to display stuff like commit times
 
 default format is `02/01/06 15:04:05 GMT-07`, so that's DD-MM-YY HH:MM:SS and
@@ -143,10 +159,12 @@ timezone, to use a different format,
 [see how time formatting is done in go](https://go.dev/src/time/format.go)
 
 ## `TW_LOGO`
+
 name of the logo file, which is displayed in the sidebar of the web interface,
 by default it's set to `logo.png`
 
 ## `TW_ICON`
+
 name of the icon file, which is displayed as the browser tab icon, by default
 it's set to `logo.png`
 

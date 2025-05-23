@@ -20,7 +20,7 @@
 
 */
 
-*{
+* {
   margin: 0;
   padding: 0;
   color: var(--text);
@@ -30,10 +30,15 @@
   background: var(--background-3);
 }
 
+html,
+body {
+  min-height: 100%;
+  height: 100%;
+}
+
 body {
   display: flex;
   flex-direction: column;
-  height: 100%;
 
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   background: var(--background-1);
@@ -43,7 +48,8 @@ body {
 }
 
 // navigation bar & footer
-nav, footer {
+nav,
+footer {
   box-sizing: border-box;
   padding: 10px;
 
@@ -72,12 +78,16 @@ nav {
 // footer
 footer {
   flex-direction: row;
-  justify-content: end;
-}
+  justify-content: space-between;
+  gap: 5px;
 
-footer {
   box-sizing: border-box;
   padding: 10px;
+
+  p,
+  a {
+    font-size: 15px;
+  }
 }
 
 // main page layout
@@ -85,13 +95,14 @@ main {
   flex: 1;
   display: flex;
   flex-direction: row;
-  align-items:  start;
+  align-items: start;
   justify-content: start;
   gap: 10px;
 }
 
 // links
-a, .link {
+a,
+.link {
   background: none;
   outline: none;
   border: none;
@@ -120,19 +131,23 @@ a, .link {
     height: 130px;
   }
 
-  .search, .latest, .list, .headings {
+  .search,
+  .latest,
+  .list,
+  .headings {
     display: flex;
     flex-direction: column;
 
     gap: 3px;
     width: 100%;
 
-    span  {
+    span {
       font-size: 15px;
       padding-left: 10px;
     }
 
-    form, div {
+    form,
+    div {
       border: solid 1px var(--border);
       border-left: none;
 
@@ -146,7 +161,8 @@ a, .link {
     }
   }
 
-  .latest, .list {
+  .latest,
+  .list {
     div {
       box-sizing: border-box;
       padding: 10px 0 10px 0;
@@ -179,17 +195,22 @@ a, .link {
       align-items: center;
     }
 
-    input, button {
+    input,
+    button {
+      box-sizing: border-box;
+      width: 10.9em;
+      padding: 2px;
+
       border: solid 1px var(--border);
       outline: none;
 
-      padding: 2px;
-      width: 10.9em;
-      font-size: 95%;
+      font-size: 15px;
 
       background: var(--background-1);
 
-      &:hover, &:active, &:focus {
+      &:hover,
+      &:active,
+      &:focus {
         border: solid 1px var(--border);
         background: var(--background-2);
       }
@@ -258,18 +279,23 @@ a, .link {
 .md {
   line-height: 1.5;
 
-  >:last-child {
+  > :last-child {
     margin-bottom: 0;
   }
 
-  >:first-child {
+  > :first-child {
     margin-top: 0;
   }
 
   // common elements
-  h1,h2,h3,h4,h5,h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-top: 1.5rem;
-    margin-bottom: .6rem;
+    margin-bottom: 0.6rem;
     font-weight: 600;
     line-height: 1.25;
   }
@@ -296,12 +322,12 @@ a, .link {
 
   h5 {
     font-weight: 600;
-    font-size: .875em;
+    font-size: 0.875em;
   }
 
   h6 {
     font-weight: 600;
-    font-size: .85em;
+    font-size: 0.85em;
   }
 
   p {
@@ -318,44 +344,52 @@ a, .link {
     margin: 10px 0 10px 0;
   }
 
-  b,strong {
-   font-weight: 600;
+  b,
+  strong {
+    font-weight: 600;
   }
 
   // ordered and unordered lists
   ul {
-    list-style: inside square;
+    list-style: outside square;
   }
 
   ol {
-    list-style: inside decimal;
+    list-style: outside decimal;
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin-bottom: 10px;
 
     ul {
-      padding-left: 1em;
-      list-style: inside disc;
+      list-style: outside disc;
     }
 
     ol {
-      padding-left: 1em;
-      list-style: inside lower-alpha;
+      list-style: outside lower-alpha;
     }
 
-    li{
+    li {
+      margin-left: 1em;
+
       &::marker {
         font-weight: 900;
         color: var(--theme-1);
       }
 
-      ul, ol {
-        margin-top: .20em;
+      &:last-child ul,
+      &:last-child ol {
         margin-bottom: 0;
       }
 
-      &>p {
+      ul,
+      ol {
+        margin-bottom: 0.4em;
+        margin-top: 0.2em;
+      }
+
+      & > p {
         margin-top: 1rem;
       }
     }
@@ -375,7 +409,7 @@ a, .link {
       padding: 0 1rem;
       margin-bottom: 15px;
 
-      &:has(+dd) {
+      &:has(+ dd) {
         margin-bottom: 5px;
       }
     }
@@ -385,7 +419,7 @@ a, .link {
   blockquote {
     margin: 0;
     padding: 10px 10px 10px 12px;
-    border-left: .25em solid var(--theme-1);
+    border-left: 0.25em solid var(--theme-1);
     background: var(--background-2);
 
     border-radius: 3px;
@@ -398,8 +432,16 @@ a, .link {
   }
 
   // code & code blocks
-  code, pre {
-    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  code,
+  pre {
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      SF Mono,
+      Menlo,
+      Consolas,
+      Liberation Mono,
+      monospace;
     font-size: 12px;
   }
 
@@ -414,7 +456,8 @@ a, .link {
     font-size: 85%;
     line-height: 1.45;
 
-    code, tt {
+    code,
+    tt {
       display: inline;
       max-width: auto;
       padding: 0;
@@ -432,7 +475,7 @@ a, .link {
   }
 
   code {
-    padding: .2em .4em;
+    padding: 0.2em 0.4em;
     margin: 0;
     font-size: 85%;
     white-space: break-spaces;
@@ -464,12 +507,13 @@ a, .link {
       font-weight: 600;
     }
 
-    th,td {
-      padding: 10px;
+    th,
+    td {
+      padding: 5px 10px;
       border: 1px solid var(--border);
     }
 
-    td>:last-child {
+    td > :last-child {
       margin-bottom: 0;
     }
 
@@ -489,11 +533,11 @@ a, .link {
   }
 
   // footnotes
-  sup a{
+  sup a {
     font-size: 11px;
   }
 
-  .footnotes>*:last-child {
+  .footnotes > *:last-child {
     padding-bottom: 0;
     margin-bottom: 0;
   }

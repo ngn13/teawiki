@@ -1,6 +1,13 @@
 version: 2
 updates:
+  # updates for go
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
       interval: "daily"
+
+  # updates for docker
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"

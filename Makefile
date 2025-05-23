@@ -23,13 +23,26 @@ run: teawiki.elf
 	TW_URL=http://127.0.0.1:8080 TW_REPO_PATH=. ./teawiki.elf
 
 format:
+	prettier --parser scss -w $(SCSS)
+	prettier --parser typescript -w static/js/*.js
 	gofmt -s -w .
+
+check:
+	# run check scripts
+	@for check in checks/*.sh; do \
+		echo "running $$check"; \
+		bash $$check; \
+	done
+	# check formatting
+	prettier --parser scss -c $(SCSS)
+	prettier --parser typescript -c static/js/*.js
+	test -z $(shell gofmt -s -l .)
 
 clean:
 	rm -f static/css/*.css
 	rm *.elf
 
 test: teawiki.elf
-	tests/run.sh
+	bash tests/run.sh
 
 .PHONY: run format clean test

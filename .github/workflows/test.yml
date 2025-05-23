@@ -3,60 +3,74 @@ name: Tests
 on:
   push:
     paths-ignore:
+      - ".github/workflows/docker.yml"
+      - "compose.example.yml"
+      - "Dockerfile"
       - "README.md"
       - "LICENSE.txt"
+      - ".gitignore"
 
 jobs:
-  format:
+  check:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout repository'
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 'Setup go'
+      - name: Setup go
         uses: actions/setup-go@v5
 
-      - name: 'Check code formatting'
-        run: test -z $(gofmt -l .)
+      - name: Setup nodejs
+        uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y sed grep make
+          npm install -g --save-dev --save-exact prettier
+
+      - name: Check code formatting
+        run: PATH="$(npm -g bin):$PATH" make check
 
   tests:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Clone repository'
+      - name: Clone repository
         run: |
           git clone https://github.com/${{github.repository}} \
             -b ${{ github.head_ref || github.ref_name }} .
 
-      - name: 'Setup go'
+      - name: Setup go
         uses: actions/setup-go@v5
 
-      - name: 'Install depends for tests'
+      - name: Install dependencies
         run: |
+          sudo apt update
           sudo apt install -y curl wget make openssl sassc
           wget 'https://github.com/mgdm/htmlq/releases/download/v0.4.0/htmlq-x86_64-linux.tar.gz' \
             -O htmlq.tar.gz
           tar xf htmlq.tar.gz
 
-      - name: 'Build the app'
+      - name: Build the app
         run: make
 
-      - name: 'History test'
-        run: PATH=$PWD:$PATH tests/run.sh history
+      - name: History test
+        run: PATH="$PWD:$PATH" tests/run.sh history
 
-      - name: 'Latest test'
-        run: PATH=$PWD:$PATH tests/run.sh latest
+      - name: Latest test
+        run: PATH="$PWD:$PATH" tests/run.sh latest
 
-      - name: 'List test'
-        run: PATH=$PWD:$PATH tests/run.sh list
+      - name: List test
+        run: PATH="$PWD:$PATH" tests/run.sh list
 
-      - name: 'Search test'
-        run: PATH=$PWD:$PATH tests/run.sh search
+      - name: Search test
+        run: PATH="$PWD:$PATH" tests/run.sh search
 
-      - name: 'Webhook test'
-        run: PATH=$PWD:$PATH tests/run.sh webhook
+      - name: Webhook test
+        run: PATH="$PWD:$PATH" tests/run.sh webhook
 
-      - name: 'Sitemap test'
-        run: PATH=$PWD:$PATH tests/run.sh sitemap
+      - name: Sitemap test
+        run: PATH="$PWD:$PATH" tests/run.sh sitemap
 
-      - name: 'Headings test'
-        run: PATH=$PWD:$PATH tests/run.sh headings
+      - name: Headings test
+        run: PATH="$PWD:$PATH" tests/run.sh headings

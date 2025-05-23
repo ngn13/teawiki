@@ -48,7 +48,8 @@
     <div class="headings">
       <span>{{l "sidebar.content"}}</span>
       <div class="md">
-        {{template "parts/heading" .page.Headings}}
+        {{$data := map "headings" .page.Headings "path" .path}}
+        {{template "parts/heading" $data}}
       </div>
     </div>
   {{end}}

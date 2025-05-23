@@ -1,8 +1,10 @@
 {{if .page}}
-  <title>{{ .page.Title }} - {{ .conf.Name }}</title>
+  <title>{{.page.Title}} - {{.conf.Name}}</title>
 {{else}}
-  <title>{{ .conf.Name }}</title>
+  <title>{{.conf.Name}}</title>
 {{end}}
+
+<!-- standart meta tags -->
 
 <meta name="viewport" content="width=1024">
 <meta name="description" content="{{.conf.Desc}}">
@@ -14,6 +16,18 @@
 {{else if eq .conf.Theme "light"}}
   <meta name="color-scheme" content="only light" />
 {{end}}
+
+<!-- open graph meta tags -->
+
+<meta property="og:title" content="{{.page.Title}}">
+<meta property="og:type" content="website">
+{{if .conf.Url}}
+  <meta property="og:image"
+    content='{{urljoin .conf.Url "/_/assets/" .conf.Icon}}'>
+  <meta property="og:url" content="{{urljoin .conf.Url}}">
+{{end}}
+
+<!-- resources -->
 
 {{if .conf.Icon}}
   <link rel="icon" href="/_/assets/{{.conf.Icon}}">

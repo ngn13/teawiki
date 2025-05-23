@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="{{.conf.Lang}}">
+  <head>
+    {{template "parts/head" .}}
+  </head>
+  <body>
+    {{template "parts/navbar" .}}
+    <main>
+      {{template "parts/sidebar" .}}
+      <div class="content md">
+        <h3>{{l "license.title"}}</h3>
+        <p>{{l "license.desc"}}</p>
+
+        <h3>{{l "license.javascript"}}</h3>
+        <table id="jslicense-labels1">
+          <thead>
+            <tr>
+              <th>{{l "license.code"}}</th>
+              <th>{{l "license.license"}}</th>
+              <th>{{l "license.source"}}</th>
+            </tr>
+          </thead>
+          <tbody>
+          {{range .scripts}}
+            <tr>
+              <td><a href="{{.}}">{{base .}}</a></td>
+              <td>
+                <a href="http://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>
+              </td>
+              <td><a href="{{.}}">{{base .}}</a></td>
+            </tr>
+          {{end}}
+          </tbody>
+        </table>
+      </div>
+    </main>
+    {{template "parts/footer" .}}
+  </body>
+</html>

@@ -72,3 +72,20 @@ func Host(u string) string {
 		return urlp.Hostname()
 	}
 }
+
+func Map(args ...any) map[string]any {
+	var (
+		key string         = "undefined"
+		res map[string]any = map[string]any{}
+	)
+
+	for i, a := range args {
+		if i%2 == 0 {
+			key = a.(string)
+		} else {
+			res[key] = a
+		}
+	}
+
+	return res
+}

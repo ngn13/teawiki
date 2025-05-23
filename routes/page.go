@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"strings"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/ngn13/teawiki/repo"
 	"github.com/ngn13/teawiki/util"
@@ -9,8 +11,12 @@ import (
 func GET_Page(c *fiber.Ctx) error {
 	rep := c.Locals("repo").(*repo.Repo)
 
-	path := rep.Resolve(c.Path())
+	path, dir := rep.Resolve(c.Path())
 	page := rep.Get(path)
+
+	if dir && !strings.HasSuffix(c.OriginalURL(), "/") {
+		return c.Redirect(c.OriginalURL() + "/")
+	}
 
 	if page == nil {
 		return util.Send(c, path)

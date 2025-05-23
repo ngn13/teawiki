@@ -3,12 +3,14 @@ name: Docker
 on:
   push:
     branches:
-      - 'main'
+      - "main"
     paths-ignore:
       - ".github/workflows/test.yml"
+      - "compose.example.yml"
       - "tests/*"
       - "README.md"
       - "LICENSE.txt"
+      - ".gitignore"
 
 env:
   REGISTRY: ghcr.io
@@ -23,21 +25,30 @@ jobs:
       packages: write
 
     steps:
-      - name: 'Checkout GitHub Action'
+      - name: Checkout repository
         uses: actions/checkout@main
 
-      - name: 'Login to GitHub Container Registry'
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to container repo
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: 'Build Inventory Image'
-        run: |
-          version="$(git rev-parse --short HEAD)"
-          docker build . \
-            --tag ${{env.REGISTRY}}/${{env.IMAGE}}:latest \
-            --tag ${{env.REGISTRY}}/${{env.IMAGE}}:$version
-          docker push ${{env.REGISTRY}}/${{env.IMAGE}}:$version
-          docker push ${{env.REGISTRY}}/${{env.IMAGE}}:latest
+      - name: Obtain the version from the commit ID
+        run: echo "VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          platforms: linux/amd64,linux/386,linux/arm64
+          tags: |
+            ${{env.REGISTRY}}/${{env.IMAGE}}:${{env.VERSION}}
+            ${{env.REGISTRY}}/${{env.IMAGE}}:latest

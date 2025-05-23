@@ -1,11 +1,12 @@
 <ul>
-  {{range .}}
+  {{range .headings}}
     <li>
       {{if .Children}}
-        <a href="#{{.ID}}">{{sanitize .Name}}</a>
-        {{template "parts/heading" .Children}}
+        <a href="{{$.path}}#{{.ID}}">{{sanitize .Name}}</a>
+        {{$data := map "headings" .Children "path" $.path}}
+        {{template "parts/heading" $data}}
       {{else}}
-        <a href="#{{.ID}}">{{sanitize .Name}}</a>
+        <a href="{{$.path}}#{{.ID}}">{{sanitize .Name}}</a>
       {{end}}
     </li>
   {{end}}
