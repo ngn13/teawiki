@@ -27,10 +27,10 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y sed grep make
-          npm install --save-dev --save-exact prettier
+          npm install -g --save-dev --save-exact prettier
 
       - name: "Check code formatting"
-        run: make check
+        run: PATH="$(npm -g bin):$PATH" make check
 
   tests:
     runs-on: ubuntu-latest
