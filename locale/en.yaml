@@ -8,6 +8,7 @@ nav:
 
 footer:
   powered: powered by teawiki
+  license: source license
 
 sidebar:
   search:
@@ -31,10 +32,23 @@ history:
   time: Time
   more: view more
 
+license:
+  title: Source code license
+  desc:
+    This wiki is powered by teawiki, which is licensed under GPL-3.0. However
+    the wiki itself may use a different license. This license is chosen by the
+    author and if you are visitor, you should respect this license and follow
+    it's conditions and the terms.
+  javascript: Javascript licenses
+  code: Code
+  license: License
+  source: Source
+
 index:
   title: Welcome to teawiki!
-  content: "This the default index page. Create a page in the README.md file to
-    change this page.\n\nSee the [project README]({{.a0}}) for more information.
+  content:
+    "This the default index page. Create a page in the README.md file to change
+    this page.\n\nSee the [documentation]({{.a0}}) for more information.
     \n\nThank you for using teawiki!"
 
 error:
@@ -49,10 +63,12 @@ error:
 
   500:
     title: Server error
-    desc: "Web server encountered an internal error, if you are the owner please
+    desc:
+      "Web server encountered an internal error, if you are the owner please
       check your server logs and report the issue"
 
   unknown:
     title: Unknown error
-    desc: "The server encountered an unknown error while looking for the page
-      you requested"
+    desc:
+      "The server encountered an unknown error while looking for the page you
+      requested"

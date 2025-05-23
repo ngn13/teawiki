@@ -126,7 +126,7 @@ func (r *Repo) Reload() error {
 	if r.Index = r.Get(INDEX_PATH); r.Index == nil {
 		r.Index = r.newPage(
 			r.Locale.Get("index.title"),
-			r.Locale.Get("index.content", consts.README),
+			r.Locale.Get("index.content", consts.DOCS),
 		)
 	}
 

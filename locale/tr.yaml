@@ -8,6 +8,7 @@ nav:
 
 footer:
   powered: teawiki ile çalışıyor
+  license: kaynak lisansı
 
 sidebar:
   search:
@@ -31,10 +32,23 @@ history:
   time: Zaman
   more: daha fazla görüntüle
 
+license:
+  title: Kaynak kodu lisansı
+  desc:
+    Bu wiki, GPL-3.0 altında lisanslı teawiki ile çalışıyor. Ancak wiki'nin
+    kendisi başka bir lisans kullanıyor olabilir. Bu lisans yazar tarafından
+    seçilmiştir ve bir ziyaretçi iseniz, bu lisansa saygı gösterip koşul ve
+    şartlarını takip etmelisiniz.
+  javascript: Javascript lisansları
+  code: Kod
+  license: Lisans
+  source: Kaynak
+
 index:
   title: Teawiki'ye hoş geldiniz!
-  content: "Bu varsayılan anasayfa. Bu sayfayı değiştirmek için README.md içinde
-    bir sayfa oluşturun.\n\nDaha fazla bilgi için [proje README]({{.a0}})'sini
+  content:
+    "Bu varsayılan anasayfa. Bu sayfayı değiştirmek için README.md içinde bir
+    sayfa oluşturun.\n\nDaha fazla bilgi için [dökümentasyonu]({{.a0}})
     inceleyin.\n\nTeawiki kullandığınız için teşekkürler!"
 
 error:
@@ -49,10 +63,12 @@ error:
 
   500:
     title: Sunucu hatası
-    desc: "Web sunucusu içsel bir hata ile karşılaştı, eğer sunucunun sahibi
-      iseniz lütfen kayıtları kontrol edip sorunu raporlayın"
+    desc:
+      "Web sunucusu içsel bir hata ile karşılaştı, eğer sunucunun sahibi iseniz
+      lütfen kayıtları kontrol edip sorunu raporlayın"
 
   unknown:
     title: Bilinmeyen hata
-    desc: "Aradığınız sayfayı ararken web sunucusu bilinmeyen bir hata ile
+    desc:
+      "Aradığınız sayfayı ararken web sunucusu bilinmeyen bir hata ile
       karşılaştı"

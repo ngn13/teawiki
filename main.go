@@ -60,6 +60,7 @@ func main() {
 	engine.AddFunc("join", path.Join)
 	engine.AddFunc("base", path.Base)
 	engine.AddFunc("dir", path.Dir)
+	engine.AddFunc("map", util.Map)
 	engine.AddFunc("l", loc.Get)
 
 	app = fiber.New(fiber.Config{
@@ -85,6 +86,7 @@ func main() {
 	app.Post("/_/search", routes.POST_Search)
 	app.Post("/_/webhook/:platform", routes.POST_Webhook)
 	app.Get("/_/history/*", routes.GET_History)
+	app.Get("/_/license", routes.GET_License)
 	app.Get("/*", routes.GET_Page)
 
 	// background thread

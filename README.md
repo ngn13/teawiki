@@ -13,6 +13,7 @@ make everything as much configurable as possible, so you can also use it if it
 fulfills your needs as well
 
 ## features
+
 - free software (free as in freedom)
 - easy installation and configuration with docker compose
 - supports both local and remote git repos
@@ -26,6 +27,7 @@ fulfills your needs as well
 - [sitemap](https://www.sitemaps.org/) generation
 
 ## missing features (that other wikis usually have)
+
 - no user account system
 - no web-based editor/manager
 - not easily extensible (no plugins, extensions etc.)
@@ -35,8 +37,9 @@ in this case i suggest you look for an another wiki software (there are
 [plenty](https://awesome-selfhosted.net/tags/wikis.html) of them)
 
 ## installation
+
 to install and run teawiki, i suggest you use docker compose, this is the
-*intended* deployment option
+_intended_ deployment option
 
 an [example compose file](compose.example.yml) can be found in the repo, copy
 this and read the documentation to configure everything properly
@@ -52,43 +55,52 @@ docker container to the internet, so you can configure stuff like SSL, CORS etc.
 - [customization](/docs/custom.md)
 
 ## development
+
 for development, clone the repository and switch to `dev` branch, all of your
 pull requests should also this branch
 
 to build the application you'll need GNU make, `go` and the SASS compiler
 `sassc`, after obtaining these, you can build the app by running:
+
 ```bash
 make
 ```
+
 i also wrote few test scripts to make my life easier, to run these you will need
 `curl`, `openssl` and `htmlq`. After obtaining these tools you can run the tests
 by running:
+
 ```bash
 make test
 ```
+
 to build the application in release mode, run:
+
 ```bash
 make RELEASE=1
 ```
 
 ### adding translations
-all the translations are in the `locale` directory, fork the repo and create the
-translation file using the [ISO
-639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) code of the
-language you want
 
-then copy the contents of `en.yaml` locale, translate all the stuff and create
-a pull request
+all the translations are in the `locale` directory, fork the repo and create the
+translation file using the
+[ISO 639](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) code of
+the language you want
+
+then copy the contents of `en.yaml` locale, translate all the stuff and create a
+pull request
 
 there are roughly 150 words to translate (maybe even less) so this should only
 take few minutes
 
 ### reporting issues
-if you encounter a problem, please create an issue with your docker compose
-file (**after removing any sensitive information**) and explain the problem you
-are encountering in detail
+
+if you encounter a problem, please create an issue with your docker compose file
+(**after removing any sensitive information**) and explain the problem you are
+encountering in detail
 
 ### other contributions
+
 if you are planning to add a new feature, please first create an issue to
 discuss it - you don't need to do this for bug fixes
 

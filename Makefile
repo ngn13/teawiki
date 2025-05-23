@@ -25,11 +25,20 @@ run: teawiki.elf
 format:
 	gofmt -s -w .
 
+check:
+	# run check scripts
+	@for check in checks/*.sh; do \
+		echo "running $$check"; \
+		bash $$check; \
+	done
+	# check formatting
+	test -z $(shell gofmt -s -l .)
+
 clean:
 	rm -f static/css/*.css
 	rm *.elf
 
 test: teawiki.elf
-	tests/run.sh
+	bash tests/run.sh
 
 .PHONY: run format clean test
