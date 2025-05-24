@@ -1,6 +1,10 @@
-FROM golang:1.24.0-alpine as builder
+# builds the binary
+FROM golang:1.24.0-alpine as build
 
-RUN apk add sassc make
+ARG TARGETOS
+ARG TARGETARCH
+
+RUN apk add git sassc make
 
 WORKDIR /src
 
@@ -22,19 +26,21 @@ COPY static   ./static
 COPY util     ./util
 COPY views    ./views
 
+ENV CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH
 RUN make RELEASE=1
 
-FROM alpine as runner
+# runs the binary
+FROM alpine
 
-RUN adduser -h /tw -D -u 1001 runner
-RUN chown -R runner:runner /tw
+RUN adduser -h /tw -D -u 1001 runner && \
+    chown -R runner:runner /tw
 
 WORKDIR /tw
 USER runner
 
-COPY --from=builder /src/locale      ./locale
-COPY --from=builder /src/static      ./static
-COPY --from=builder /src/views       ./views
-COPY --from=builder /src/teawiki.elf ./
+COPY --from=build /src/locale      ./locale
+COPY --from=build /src/static      ./static
+COPY --from=build /src/views       ./views
+COPY --from=build /src/teawiki.elf ./
 
 ENTRYPOINT ["/tw/teawiki.elf"]
