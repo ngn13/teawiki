@@ -20,9 +20,22 @@ sidebar:
   content: content
 
 search:
-  count: "Listing {{.a0}} results"
-  none: No results
-  empty: There are no results for the term you have searched
+  title:
+    one: "Listing {{.a0}} result"
+    other: "Listing {{.a0}} results"
+  desc: Showing results for the search term
+  none:
+    title: No results
+    desc: There are no results for the term you have searched
+  titles:
+    one: "{{.a0}} title match"
+    other: "{{.a0}} title matches"
+  headings:
+    one: "{{.a0}} heading match"
+    other: "{{.a0}} heading matches"
+  tags:
+    one: "{{.a0}} tag match"
+    other: "{{.a0}} tag matches"
 
 history:
   title: "Commit history for {{.a0}}"

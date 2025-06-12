@@ -47,9 +47,11 @@ func main() {
 	reload_timer := time.NewTicker(conf.ReloadInterval)
 	reload_chan := make(chan bool)
 
+	// TODO: handle other signals as well
 	signal.Notify(signal_chan, os.Interrupt)
 	defer reload_timer.Stop()
 
+	// setup custom engine functions
 	engine := html.New("./views", ".html")
 	engine.AddFunc("sanitize", util.Sanitize)
 	engine.AddFunc("urljoin", util.UrlJoin)
@@ -61,8 +63,10 @@ func main() {
 	engine.AddFunc("base", path.Base)
 	engine.AddFunc("dir", path.Dir)
 	engine.AddFunc("map", util.Map)
+	engine.AddFunc("add", util.Add)
 	engine.AddFunc("l", loc.Get)
 
+	// setup the web application
 	app = fiber.New(fiber.Config{
 		AppName:               "teawiki",
 		Views:                 engine,
@@ -79,11 +83,12 @@ func main() {
 		return c.Next()
 	})
 
-	// routes
+	// HTTP routes
 	app.Get("/", routes.GET_Index)
 	app.Get("/robots.txt", routes.GET_Robots)
 	app.Get("/sitemap.xml", routes.GET_Sitemap)
 	app.Post("/_/search", routes.POST_Search)
+	app.Get("/_/search", routes.GET_Search)
 	app.Post("/_/webhook/:platform", routes.POST_Webhook)
 	app.Get("/_/history/*", routes.GET_History)
 	app.Get("/_/license", routes.GET_License)

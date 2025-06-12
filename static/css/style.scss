@@ -419,8 +419,7 @@ a,
   blockquote {
     margin: 0;
     padding: 10px 10px 10px 12px;
-    border-left: 0.25em solid var(--theme-1);
-    background: var(--background-2);
+    border-left: 0.25em solid var(--theme-2);
 
     border-radius: 3px;
     margin-bottom: 10px;
@@ -428,6 +427,10 @@ a,
     > *:last-child {
       padding-bottom: 0;
       margin-bottom: 0;
+    }
+
+    * {
+      color: var(--theme-1);
     }
   }
 

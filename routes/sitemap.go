@@ -67,12 +67,12 @@ func GET_Sitemap(c *fiber.Ctx) error {
 		set.Add(conf.Url.String(), nil, "1.0")
 	}
 
-	for path, page := range rep.Pages {
-		if !page.HasHistory || path == repo.INDEX_PATH {
+	for _, page := range rep.Pages {
+		if !page.HasHistory || page.Relpath == repo.INDEX_PATH {
 			continue
 		}
 
-		fp := conf.Url.JoinPath(path).String()
+		fp := conf.Url.JoinPath(page.Relpath).String()
 		set.Add(fp, &page.LastUpdate)
 	}
 

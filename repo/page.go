@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"slices"
 	"strings"
 	"time"
 
@@ -19,19 +20,30 @@ type Field struct {
 }
 
 type Page struct {
+	Relpath    string     `yaml:"-"`
+	Abspath    string     `yaml:"-"`
 	HasHistory bool       `yaml:"-"`
 	LastUpdate time.Time  `yaml:"-"`
 	Headings   []*Heading `yaml:"-"`
 
 	// this stuff is parsed from the file
-	Title   string  `yaml:"title"`
-	Image   string  `yaml:"image"`
-	Fields  []Field `yaml:"fields"`
-	Content string  `yaml:"-"`
+	Title   string   `yaml:"title"`
+	Image   string   `yaml:"image"`
+	Tags    []string `yaml:"tags"`
+	Fields  []Field  `yaml:"fields"`
+	Content string   `yaml:"-"`
 }
 
 func (p *Page) IsValid() bool {
 	return p.Title != "" && p.Content != ""
+}
+
+func (p *Page) Path(id ...string) string {
+	if len(id) <= 0 {
+		return p.Relpath
+	}
+
+	return fmt.Sprintf("%s#%s", p.Relpath, id[0])
 }
 
 func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
@@ -132,7 +144,11 @@ func (r *Repo) newPage(title string, content string) *Page {
 
 // traverses the git repo recursively to obtain all the pages
 func (r *Repo) traverse(dir ...string) error {
-	var page *Page
+	var (
+		page    *Page
+		entries []os.DirEntry
+		err     error
+	)
 
 	rel_dir := "/"
 
@@ -142,8 +158,7 @@ func (r *Repo) traverse(dir ...string) error {
 
 	abs_dir := path.Join(r.Config.RepoPath, rel_dir)
 
-	entries, err := os.ReadDir(abs_dir)
-	if err != nil {
+	if entries, err = os.ReadDir(abs_dir); err != nil {
 		return err
 	}
 
@@ -162,6 +177,7 @@ func (r *Repo) traverse(dir ...string) error {
 			// if entry is a directory, traverse it
 			err = r.traverse(rel_entry)
 		} else if path.Ext(name) == PAGE_EXT {
+			// otherwise just load the page
 			page, err = r.loadPage(abs_entry)
 		}
 
@@ -173,18 +189,25 @@ func (r *Repo) traverse(dir ...string) error {
 
 		// successfuly loaded the page, save it
 		if page != nil {
-			r.Pages[rel_entry] = page
+			page.Relpath = rel_entry
+			page.Abspath = abs_entry
+			r.Pages = append(r.Pages, page)
 		}
 	}
 
 	return nil
 }
 
-func (r *Repo) Get(fp string) *Page {
-	if r.Pages == nil {
+func (r *Repo) Get(rp string) *Page {
+	indx := slices.IndexFunc(r.Pages, func(p *Page) bool {
+		return p.Relpath == rp
+	})
+
+	if indx < 0 {
 		return nil
 	}
-	return r.Pages[fp]
+
+	return r.Pages[indx]
 }
 
 func (r *Repo) History(fp string, start, count int) ([]History, bool) {
@@ -196,21 +219,4 @@ func (r *Repo) History(fp string, start, count int) ([]History, bool) {
 	} else {
 		return history, more
 	}
-}
-
-func (r *Repo) Find(term string) map[string]*Page {
-	results := make(map[string]*Page)
-	term = strings.ToLower(term)
-
-	for path, page := range r.Pages {
-		title_lower := strings.ToLower(page.Title)
-		path_lower := strings.ToLower(path)
-
-		if strings.Contains(title_lower, term) ||
-			strings.Contains(path_lower, term) {
-			results[path] = page
-		}
-	}
-
-	return results
 }

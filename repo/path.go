@@ -34,15 +34,15 @@ func (r *Repo) Resolve(rp string) (string, bool) {
 func (r *Repo) List(dir string) []string {
 	results := []string{}
 
-	for pth := range r.Pages {
-		d := path.Dir(pth)
+	for _, page := range r.Pages {
+		d := path.Dir(page.Relpath)
 
 		if d == dir {
-			results = append(results, pth)
+			results = append(results, page.Relpath)
 			continue
 		}
 
-		if path.Base(pth) == INDEX_NAME && path.Dir(d) == dir {
+		if path.Base(page.Relpath) == INDEX_NAME && path.Dir(d) == dir {
 			results = append(results, d)
 		}
 	}
