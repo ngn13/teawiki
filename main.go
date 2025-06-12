@@ -4,6 +4,7 @@ import (
 	"os"
 	"os/signal"
 	"path"
+	"syscall"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -47,8 +48,7 @@ func main() {
 	reload_timer := time.NewTicker(conf.ReloadInterval)
 	reload_chan := make(chan bool)
 
-	// TODO: handle other signals as well
-	signal.Notify(signal_chan, os.Interrupt)
+	signal.Notify(signal_chan, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 	defer reload_timer.Stop()
 
 	// setup custom engine functions
