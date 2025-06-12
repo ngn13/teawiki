@@ -2,7 +2,7 @@ title: Aurea
 tags:
   - example
   - test
-  - tag
+  - lorem
 
 %%%
 

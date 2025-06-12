@@ -1,4 +1,7 @@
 title: Bellaque
+tags:
+  - example
+  - lorem
 
 %%%
 

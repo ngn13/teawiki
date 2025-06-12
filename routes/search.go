@@ -15,6 +15,70 @@ const (
 	SEARCH_ALL     = 3
 )
 
+func matchesTitle(page *repo.Page, term string, exact bool) bool {
+	if exact {
+		// check if exact match
+		return page.Title == term
+	}
+
+	// check if the title contains the term
+	return strings.Contains(strings.ToLower(page.Title), term)
+}
+
+func matchesHeadings(headings []*repo.Heading, term string, exact bool) string {
+	for _, heading := range headings {
+		if exact {
+			// check if exact match
+			if heading.Name == term {
+				return heading.ID
+			}
+
+			continue
+		}
+
+		// check if the heading contains the term
+		if strings.Contains(strings.ToLower(heading.Name), term) {
+			return heading.ID
+		}
+
+		// check the children headings
+		if id := matchesHeadings(heading.Children, term, exact); id != "" {
+			return id
+		}
+	}
+
+	// no matches
+	return ""
+}
+
+func matchesTags(page *repo.Page, term string, exact bool) bool {
+	for _, tag := range page.Tags {
+		if exact {
+			// check if exact match
+			if tag == term {
+				return true
+			}
+
+			continue
+		}
+
+		// check if tag contains the term
+		lower := strings.ToLower(tag)
+		return strings.Contains(lower, term)
+	}
+
+	return false
+}
+
+func isType(list *map[string]*repo.Page, a, b int) bool {
+	if a == b || a == SEARCH_ALL {
+		*list = make(map[string]*repo.Page)
+		return true
+	}
+
+	return false
+}
+
 func search(c *fiber.Ctx, term string, exact bool) error {
 	var titles, headings, tags map[string]*repo.Page
 
@@ -29,26 +93,48 @@ func search(c *fiber.Ctx, term string, exact bool) error {
 		switch target[0] {
 		case "title":
 			search_type = SEARCH_TITLE
-			search_term = strings.TrimLeft(term, "title:")
+			search_term = strings.TrimPrefix(term, "title:")
 		case "heading":
 			search_type = SEARCH_HEADING
-			search_term = strings.TrimLeft(term, "heading:")
+			search_term = strings.TrimPrefix(term, "heading:")
 		case "tag":
 			search_type = SEARCH_TAG
-			search_term = strings.TrimLeft(term, "tag:")
+			search_term = strings.TrimPrefix(term, "tag:")
 		}
 	}
 
-	if search_type == SEARCH_TITLE || search_type == SEARCH_ALL {
-		titles = rep.SearchTitles(search_term, exact)
+	if !exact {
+		search_term = strings.ToLower(search_term)
 	}
 
-	if search_type == SEARCH_HEADING || search_type == SEARCH_ALL {
-		headings = rep.SearchHeadings(search_term, exact)
+	// search page titles
+	if isType(&titles, search_type, SEARCH_TITLE) {
+		rep.EachPage(func(p *repo.Page) {
+			// check if the page title matches the search term
+			if matchesTitle(p, search_term, exact) {
+				titles[p.Relpath] = p
+			}
+		})
 	}
 
-	if search_type == SEARCH_TAG || search_type == SEARCH_ALL {
-		tags = rep.SearchTags(search_term, exact)
+	// search page headings
+	if isType(&headings, search_type, SEARCH_HEADING) {
+		rep.EachPage(func(p *repo.Page) {
+			// check if any of the headings matches the term
+			if id := matchesHeadings(p.Headings, search_term, exact); id != "" {
+				headings[p.Relpath+"#"+id] = p
+			}
+		})
+	}
+
+	// search page tags
+	if isType(&tags, search_type, SEARCH_TAG) {
+		rep.EachPage(func(p *repo.Page) {
+			// check if any of the page tags contain the term
+			if matchesTags(p, search_term, exact) {
+				tags[p.Relpath] = p
+			}
+		})
 	}
 
 	return util.Ok(c, "search", fiber.Map{
