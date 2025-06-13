@@ -23,7 +23,7 @@ search:
   title:
     one: "Listing {{.a0}} result"
     other: "Listing {{.a0}} results"
-  desc: Showing results for the search term
+  desc: Showing results for the term you have searched
   none:
     title: No results
     desc: There are no results for the term you have searched

@@ -101,16 +101,26 @@ func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
 
 	page = &Page{}
 
-	// parse the YAML metadata
+	// parse the YAML metadata & check if it's valid
 	if err = yaml.NewDecoder(yaml_reader).Decode(page); err != nil {
 		return nil, err
 	}
 
-	// parse the markdown content
+	if page.Title == "" {
+		return nil, fmt.Errorf("page title is not specified")
+	}
+
+	for _, tag := range page.Tags {
+		if tag == "" || strings.ContainsAny(tag, "\"!'^+%&/()=?*\\#,") {
+			return nil, fmt.Errorf("bad tag name: %s", tag)
+		}
+	}
+
+	// parse the markdown content & check if it's valid
 	page.Content = string(r.Markdown.Render(mark_reader))
 
-	if !page.IsValid() {
-		return nil, fmt.Errorf("invalid page data")
+	if page.Content == "" {
+		return nil, fmt.Errorf("empty page content")
 	}
 
 	// get the last update time

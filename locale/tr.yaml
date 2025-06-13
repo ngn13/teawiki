@@ -19,6 +19,7 @@ sidebar:
   list: "{{.a0}} içindeki sayfalar"
   content: içerik
 
+# TODO: update these translations
 search:
   count: "{{.a0}} sonuç listeleniyor"
   none: Sonuç bulunamadı

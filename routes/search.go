@@ -9,10 +9,10 @@ import (
 )
 
 const (
-	SEARCH_TITLE   = 0
-	SEARCH_HEADING = 1
-	SEARCH_TAG     = 2
-	SEARCH_ALL     = 3
+	SEARCH_ALL     = 0
+	SEARCH_TITLE   = 1
+	SEARCH_HEADING = 2
+	SEARCH_TAG     = 3
 )
 
 func matchesTitle(page *repo.Page, term string, exact bool) bool {
@@ -51,36 +51,37 @@ func matchesHeadings(headings []*repo.Heading, term string, exact bool) string {
 	return ""
 }
 
-func matchesTags(page *repo.Page, term string, exact bool) bool {
+func matchesTags(page *repo.Page, term string, exact bool) string {
 	for _, tag := range page.Tags {
 		if exact {
 			// check if exact match
 			if tag == term {
-				return true
+				return tag
 			}
 
 			continue
 		}
 
 		// check if tag contains the term
-		lower := strings.ToLower(tag)
-		return strings.Contains(lower, term)
+		if strings.Contains(strings.ToLower(tag), term) {
+			return tag
+		}
+
+		return ""
 	}
 
-	return false
+	return ""
 }
 
-func isType(list *map[string]*repo.Page, a, b int) bool {
-	if a == b || a == SEARCH_ALL {
-		*list = make(map[string]*repo.Page)
-		return true
-	}
-
-	return false
+func isType(a, b int) bool {
+	return a == b || a == SEARCH_ALL
 }
 
 func search(c *fiber.Ctx, term string, exact bool) error {
-	var titles, headings, tags map[string]*repo.Page
+	var (
+		titles, headings map[string]*repo.Page
+		tags             map[string]string
+	)
 
 	rep := c.Locals("repo").(*repo.Repo)
 	target := strings.Split(term, ":")
@@ -108,7 +109,10 @@ func search(c *fiber.Ctx, term string, exact bool) error {
 	}
 
 	// search page titles
-	if isType(&titles, search_type, SEARCH_TITLE) {
+	if isType(search_type, SEARCH_TITLE) {
+		// create the page URL to page map
+		titles = make(map[string]*repo.Page)
+
 		rep.EachPage(func(p *repo.Page) {
 			// check if the page title matches the search term
 			if matchesTitle(p, search_term, exact) {
@@ -118,7 +122,10 @@ func search(c *fiber.Ctx, term string, exact bool) error {
 	}
 
 	// search page headings
-	if isType(&headings, search_type, SEARCH_HEADING) {
+	if isType(search_type, SEARCH_HEADING) {
+		// create the heading URL to page map
+		headings = make(map[string]*repo.Page)
+
 		rep.EachPage(func(p *repo.Page) {
 			// check if any of the headings matches the term
 			if id := matchesHeadings(p.Headings, search_term, exact); id != "" {
@@ -128,17 +135,21 @@ func search(c *fiber.Ctx, term string, exact bool) error {
 	}
 
 	// search page tags
-	if isType(&tags, search_type, SEARCH_TAG) {
+	if isType(search_type, SEARCH_TAG) {
+		// create the tag URL to tag
+		tags = make(map[string]string)
+
 		rep.EachPage(func(p *repo.Page) {
 			// check if any of the page tags contain the term
-			if matchesTags(p, search_term, exact) {
-				tags[p.Relpath] = p
+			if tag := matchesTags(p, search_term, exact); tag != "" {
+				tags["/_/tag/"+tag] = tag
 			}
 		})
 	}
 
 	return util.Ok(c, "search", fiber.Map{
 		"term": term,
+		"type": search_type,
 		"result": fiber.Map{
 			"titles":   titles,
 			"headings": headings,

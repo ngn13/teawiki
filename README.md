@@ -24,6 +24,7 @@ fulfills your needs as well
 - YAML and markdown based article/page format (with code syntax highlighting)
 - very simple, static [infobox](https://en.wikipedia.org/wiki/Infobox) support
   (also inspired by MediaWiki)
+- page tags and easy to use search functionality
 - webhook support for syncing with the remote repos instantly
 - [sitemap](https://www.sitemaps.org/) generation
 

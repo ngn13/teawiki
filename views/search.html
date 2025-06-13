@@ -19,7 +19,9 @@
         {{end}}
 
         {{if .result.titles}}
-          <h4 class="matches">{{l "search.titles" .length.titles}}</h4>
+          {{if eq .type 0}}
+            <h4 class="matches">{{l "search.titles" .length.titles}}</h4>
+          {{end}}
           <ul>
             {{range $path, $page := .result.titles}}
               <li><a href="{{$path}}">{{$page.Title}}</a></li>
@@ -28,7 +30,9 @@
         {{end}}
 
         {{if .result.headings}}
-          <h4 class="matches">{{l "search.headings" .length.headings}}</h4>
+          {{if eq .type 0}}
+            <h4 class="matches">{{l "search.headings" .length.headings}}</h4>
+          {{end}}
           <ul>
             {{range $path, $page := .result.headings}}
               <li><a href="{{$path}}">{{$page.Title}}</a></li>
@@ -37,10 +41,12 @@
         {{end}}
 
         {{if .result.tags}}
-          <h4 class="matches">{{l "search.tags" .length.tags}}</h4>
+          {{if eq .type 0}}
+            <h4 class="matches">{{l "search.tags" .length.tags}}</h4>
+          {{end}}
           <ul>
-            {{range $path, $page := .result.tags}}
-              <li><a href="{{$path}}">{{$page.Title}}</a></li>
+            {{range $path, $tag := .result.tags}}
+              <li><a href="{{$path}}">{{$tag}}</a></li>
             {{end}}
           </ul>
         {{end}}

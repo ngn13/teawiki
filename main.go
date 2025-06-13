@@ -87,6 +87,7 @@ func main() {
 	app.Get("/", routes.GET_Index)
 	app.Get("/robots.txt", routes.GET_Robots)
 	app.Get("/sitemap.xml", routes.GET_Sitemap)
+	app.Get("/_/tag/:tag", routes.GET_Tag)
 	app.Post("/_/search", routes.POST_Search)
 	app.Get("/_/search", routes.GET_Search)
 	app.Post("/_/webhook/:platform", routes.POST_Webhook)
