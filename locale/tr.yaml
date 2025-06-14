@@ -19,11 +19,23 @@ sidebar:
   list: "{{.a0}} içindeki sayfalar"
   content: içerik
 
-# TODO: update these translations
 search:
-  count: "{{.a0}} sonuç listeleniyor"
-  none: Sonuç bulunamadı
-  empty: Aradığınız terim için herhangi bir sonuç bulunamadı
+  title:
+    one: "{{.a0}} sonuç listeleniyor"
+    other: "{{.a0}} sonuç listeleniyor"
+  desc: Aradığınız terim için sonuçlar gösteriliyor
+  none:
+    title: Sonuç bulunamadı
+    desc: Aradığınız terim için herhangi bir sonuç bulunamadı
+  titles:
+    one: "{{.a0}} isim eşleşmesi"
+    other: "{{.a0}} isim eşleşmesi"
+  headings:
+    one: "{{.a0}} başlık eşleşmesi"
+    other: "{{.a0}} başlık eşleşmesi"
+  tags:
+    one: "{{.a0}} etiket eşleşmesi"
+    other: "{{.a0}} etiket eşleşmesi"
 
 history:
   title: "{{.a0}} için commit geçmişi"
@@ -51,6 +63,11 @@ index:
     "Bu varsayılan anasayfa. Bu sayfayı değiştirmek için README.md içinde bir
     sayfa oluşturun.\n\nDaha fazla bilgi için [dökümentasyonu]({{.a0}})
     inceleyin.\n\nTeawiki kullandığınız için teşekkürler!"
+
+tag:
+  desc:
+    one: "Bu etikete sahip {{.a0}} sayfa mevcut"
+    other: "Bu etikete sahip {{.a0}} sayfa mevcut"
 
 error:
   404:

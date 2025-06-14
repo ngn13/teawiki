@@ -121,6 +121,7 @@ a,
 #sidebar {
   display: flex;
   flex-direction: column;
+  max-width: 200px;
 
   justify-content: center;
   align-items: center;
@@ -144,6 +145,7 @@ a,
     span {
       font-size: 15px;
       padding-left: 10px;
+      word-wrap: break-word;
     }
 
     form,
