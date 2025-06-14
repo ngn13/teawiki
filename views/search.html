@@ -9,7 +9,12 @@
     <main>
       {{template "parts/sidebar" .}}
       <div class="content md">
-        {{$total := (add .length.titles .length.headings .length.tags)}}
+        {{$titles_len := (len .result.titles)}}
+        {{$headings_len := (len .result.headings)}}
+        {{$tags_len := (len .result.tags)}}
+
+        {{$total := (add $titles_len $headings_len $tags_len)}}
+
         {{if eq $total 0}}
           <h2>{{l "search.none.title"}}</h2>
           <p>{{l "search.none.desc"}}</p>
@@ -19,8 +24,8 @@
         {{end}}
 
         {{if .result.titles}}
-          {{if eq .type 0}}
-            <h4 class="matches">{{l "search.titles" .length.titles}}</h4>
+          {{if .all}}
+            <h4 class="matches">{{l "search.titles" $titles_len}}</h4>
           {{end}}
           <ul>
             {{range $path, $page := .result.titles}}
@@ -30,23 +35,27 @@
         {{end}}
 
         {{if .result.headings}}
-          {{if eq .type 0}}
-            <h4 class="matches">{{l "search.headings" .length.headings}}</h4>
+          {{if .all}}
+            <h4 class="matches">{{l "search.headings" $headings_len}}</h4>
           {{end}}
           <ul>
-            {{range $path, $page := .result.headings}}
-              <li><a href="{{$path}}">{{$page.Title}}</a></li>
+            {{range $path, $res := .result.headings}}
+              <li>
+                <a href="{{$path}}">
+                  {{$res.Page.Title}}: {{$res.Heading.Name}}
+                </a>
+              </li>
             {{end}}
           </ul>
         {{end}}
 
         {{if .result.tags}}
-          {{if eq .type 0}}
-            <h4 class="matches">{{l "search.tags" .length.tags}}</h4>
+          {{if .all}}
+            <h4 class="matches">{{l "search.tags" $tags_len}}</h4>
           {{end}}
           <ul>
             {{range $path, $tag := .result.tags}}
-              <li><a href="{{$path}}">{{$tag}}</a></li>
+              <li><a href="{{$path}}">#{{$tag}}</a></li>
             {{end}}
           </ul>
         {{end}}

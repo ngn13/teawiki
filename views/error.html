@@ -9,19 +9,19 @@
       {{template "parts/sidebar" .}}
       <div class="content md">
         {{if eq .code 404}}
-          <h3>{{l "error.404.title"}}</h3>
+          <h2>{{l "error.404.title"}}</h2>
           <p>{{l "error.404.desc"}}</p>
           {{if .path}}
             <p>{{l "error.404.create" .path}}</p>
           {{end}}
         {{else if eq .code 400}}
-          <h3>{{l "error.400.title"}}</h3>
+          <h2>{{l "error.400.title"}}</h2>
           <p>{{l "error.400.desc"}}</p>
         {{else if eq .code 500}}
-          <h3>{{l "error.500.title"}}</h3>
+          <h2>{{l "error.500.title"}}</h2>
           <p>{{l "error.500.desc"}}</p>
         {{else}}
-          <h3>{{l "error.unknown.title"}}</h3>
+          <h2>{{l "error.unknown.title"}}</h2>
           <p>{{l "error.unknown.desc"}}</p>
         {{end}}
       </div>

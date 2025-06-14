@@ -13,7 +13,7 @@
         {{if ne (len .page.Tags) 0}}
           <div class="tags">
             {{range .page.Tags}}
-              <a href="/_/search?term=tag:{{.}}&exact=1">{{.}}</a>
+              <a href="/_/tag/{{.}}">#{{.}}</a>
             {{end}}
           </div>
         {{end}}

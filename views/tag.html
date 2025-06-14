@@ -8,10 +8,11 @@
     <main>
       {{template "parts/sidebar" .}}
       <div class="content md">
-        <h2>{{l "tag.list" (sanitize .tag)}}</h2>
+        <h2>#{{(sanitize .tag)}}</h2>
+        <p>{{l "tag.desc" (len .pages)}}</p>
         <ul>
           {{range .pages}}
-            <li><a href="{{.page.Relpath}}">{{.page.Title}}</a></li>
+            <li><a href="{{.Relpath}}">{{.Title}}</a></li>
           {{end}}
         </ul>
       </div>

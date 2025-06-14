@@ -33,6 +33,10 @@ func main() {
 		os.Exit(1)
 	}
 
+	if !conf.Debug {
+		log.Debg = func(format string, v ...any) {}
+	}
+
 	if loc, err = locale.New(conf); err != nil {
 		log.Fail("failed to load the locale: %s", err.Error())
 		os.Exit(1)

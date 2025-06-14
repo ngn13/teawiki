@@ -20,7 +20,7 @@ endif
 	sassc $^ $@
 
 run: teawiki.elf
-	TW_URL=http://127.0.0.1:8080 TW_REPO_PATH=. ./teawiki.elf
+	TW_DEBUG=1 TW_URL=http://127.0.0.1:8080 TW_REPO_PATH=. ./teawiki.elf
 
 format:
 	prettier --parser scss -w $(SCSS)
