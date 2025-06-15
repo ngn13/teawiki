@@ -33,6 +33,8 @@ func GET_History(c *fiber.Ctx) error {
 		return util.NotFound(c)
 	}
 
+	// TODO: maybe add a RSS feed to the history page?
+
 	return util.Ok(c, "history", fiber.Map{
 		"page":    page,
 		"path":    path,
