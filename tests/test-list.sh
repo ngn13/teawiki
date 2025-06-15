@@ -1,7 +1,9 @@
 #!/bin/bash
 
-dir="tests/content/b"
-list="$(curl -s "${TW_URL}/${dir}/" | htmlq -a href '.list div a')"
+page="tests/content/b/README.md"
+dir="$(dirname "${page}")"
+
+list="$(curl -s "${TW_URL}/${page}" | htmlq -a href '.list div a')"
 
 for file in $(ls -1 "${dir}"); do
   contains "${list}" "/${dir}/${file}" || fail
