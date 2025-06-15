@@ -1,8 +1,6 @@
 package routes
 
 import (
-	"strings"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/ngn13/teawiki/repo"
 	"github.com/ngn13/teawiki/util"
@@ -11,19 +9,28 @@ import (
 func GET_Page(c *fiber.Ctx) error {
 	rep := c.Locals("repo").(*repo.Repo)
 
-	path, dir := rep.Resolve(c.Path())
-	page := rep.Get(path)
+	cpath := c.Path()
+	rpath := rep.Resolve(cpath)
 
-	if dir && !strings.HasSuffix(c.OriginalURL(), "/") {
-		return c.Redirect(c.OriginalURL() + "/")
+	// check if we failed to resolve the path
+	if rpath == "" {
+		return util.NotFound(c)
 	}
 
+	// check if the requested patch matches with the resolved path
+	if rpath != cpath {
+		return c.Redirect(rpath)
+	}
+
+	// obtain the page from the resolved path
+	page := rep.Get(rpath)
+
 	if page == nil {
-		return util.Send(c, path)
+		return util.Send(c, rpath)
 	}
 
 	return util.Ok(c, "page", fiber.Map{
 		"page": page,
-		"path": path,
+		"path": rpath,
 	})
 }
