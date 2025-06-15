@@ -8,6 +8,7 @@ prefix, any other environment variable will not effect the configuration
 
 here is a list of all the available options:
 
+- [`TW_DEBUG`](#tw_debug)
 - [`TW_LISTEN` (required)](#tw_listen-required)
 - [`TW_URL`](#tw_url)
 - [`TW_NAME` (required)](#tw_name-required)
@@ -25,6 +26,12 @@ here is a list of all the available options:
 - [`TW_TIME`](#tw_time)
 - [`TW_LOGO`](#tw_logo)
 - [`TW_ICON`](#tw_icon)
+
+## `TW_DEBUG`
+
+enable debug logging
+
+default is `false`
 
 ## `TW_LISTEN` (required)
 

@@ -69,8 +69,8 @@ make
 ```
 
 I also wrote few test scripts to make my life easier, to run these you will need
-`curl`, `openssl` and `htmlq`. After obtaining these tools you can run the tests
-by running:
+GNU grep, GNU sed, PCRE2, `curl`, `openssl` and `htmlq`. After obtaining these
+tools you can run the tests by running:
 
 ```bash
 make test
@@ -90,7 +90,7 @@ obtaining these, you can format the code by running:
 make format
 ```
 
-to check for any formatting errors, you'll also need GNU sed and grep:
+to check for any formatting errors:
 
 ```bash
 make check
