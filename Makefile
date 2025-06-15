@@ -30,6 +30,7 @@ format:
 check:
 	# run check scripts
 	@for check in checks/*.sh; do \
+		grep "OPTIONAL" "$$check" &> /dev/null && continue; \
 		echo "running $$check"; \
 		bash $$check; \
 	done

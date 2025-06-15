@@ -24,6 +24,10 @@ search:
     one: "{{.a0}} sonuç listeleniyor"
     other: "{{.a0}} sonuç listeleniyor"
   desc: Aradığınız terim için sonuçlar gösteriliyor
+  tip:
+    Sadece sayfa isimlerini aramak için "title:" ön kelimesini, sayfa
+    başlıklarını aramak için "heading:" ön kelimesini ve sayfa etiketleri aramak
+    için "tag:" ön kelimesini kullanabilirsiniz.
   none:
     title: Sonuç bulunamadı
     desc: Aradığınız terim için herhangi bir sonuç bulunamadı

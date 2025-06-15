@@ -24,6 +24,10 @@ search:
     one: "Listing {{.a0}} result"
     other: "Listing {{.a0}} results"
   desc: Showing results for the term you have searched
+  tip:
+    To only search for page titles, you can use the "title:" prefix. To only
+    search for page headings, you can use the "heading:" prefix. Lastly, to only
+    search for page tags, you can use the "tag:" prefix.
   none:
     title: No results
     desc: There are no results for the term you have searched
