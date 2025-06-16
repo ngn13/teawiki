@@ -24,19 +24,29 @@ type Locale struct {
 }
 
 func (l *Locale) Get(id string, args ...interface{}) string {
-	var data map[string]interface{} = nil
+	var (
+		data   map[string]interface{} = nil
+		plural int                    = 2
+	)
 
 	for i, arg := range args {
 		if data == nil {
 			data = make(map[string]interface{})
 		}
+
 		data["a"+strconv.Itoa(i)] = arg
+
+		if iarg, ok := arg.(int); i == 0 && ok && iarg == 1 {
+			plural = 1
+		}
 	}
 
 	str, err := l.Localizer.Localize(&i18n.LocalizeConfig{
 		MessageID:    id,
 		TemplateData: data,
+		PluralCount:  plural,
 	})
+
 	if err != nil {
 		log.Warn("failed to get the locale for %s: %s", id, err.Error())
 		return id

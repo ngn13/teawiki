@@ -34,6 +34,7 @@ func (r *Repo) history(file string, start, count int) ([]History, bool, error) {
 		From:  r.Head.Hash(),
 		Order: git.LogOrderCommitterTime,
 	})
+
 	if err != nil {
 		return nil, false, err
 	}

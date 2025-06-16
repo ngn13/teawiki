@@ -6,6 +6,24 @@
   margin-bottom: 1rem;
 }
 
+.tags {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+
+  margin-bottom: 1rem;
+
+  a {
+    font-size: 16px;
+
+    &:hover {
+      color: var(--text);
+      background: var(--theme-2);
+      text-decoration: none;
+    }
+  }
+}
+
 .infobox {
   float: right;
   clear: right;

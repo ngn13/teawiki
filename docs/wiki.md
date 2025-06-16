@@ -30,6 +30,17 @@ specifies the title of the page, here is an example:
 title: i386
 ```
 
+you can also specify multiple tags for a page, users can click on these tags to
+view pages with the same tags and they can also search for these tags, which
+makes it easier for users to discover similar pages:
+
+```yaml
+tags:
+  - cpu
+  - intel
+  - x86
+```
+
 another key you can use is the `image` key, which when specified will create an
 [infobox](https://en.wikipedia.org/wiki/Infobox) with the specified image, for
 example:

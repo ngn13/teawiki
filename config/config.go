@@ -9,6 +9,7 @@ import (
 )
 
 type Config struct {
+	Debug      bool
 	ListenAddr string `ortam:"LISTEN"`
 
 	Url      *url.URL
@@ -41,6 +42,7 @@ func (c *Config) TimeStr(t time.Time) string {
 func Load() (*Config, error) {
 	config := Config{
 		// default options
+		Debug:      false,
 		ListenAddr: "127.0.0.1:8080",
 
 		Url:      nil,

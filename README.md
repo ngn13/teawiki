@@ -24,6 +24,7 @@ fulfills your needs as well
 - YAML and markdown based article/page format (with code syntax highlighting)
 - very simple, static [infobox](https://en.wikipedia.org/wiki/Infobox) support
   (also inspired by MediaWiki)
+- page tags and easy search functionality
 - webhook support for syncing with the remote repos instantly
 - [sitemap](https://www.sitemaps.org/) generation
 
@@ -67,32 +68,32 @@ to build the application you'll need GNU make, `go` and the SASS compiler
 make
 ```
 
-I also wrote few test scripts to make my life easier, to run these you will need
-`curl`, `openssl` and `htmlq`. After obtaining these tools you can run the tests
-by running:
-
-```bash
-make test
-```
-
 to build the application in release mode, run:
 
 ```bash
 make RELEASE=1
 ```
 
-to check format the code properly, you'll need `gofmt` (part of the go toolkit,
-if you installed `go` you probably already have this) and prettier. After
-obtaining these, you can format the code by running:
+to check format the code properly, you'll also need `gofmt` (part of the go
+toolkit, if you installed `go` you probably already have this) and prettier.
+After obtaining these, you can format the code by running:
 
 ```bash
 make format
 ```
 
-to check for any formatting errors, you'll also need GNU sed and grep:
+to check for any syntax/formatting errors, you'll also need GNU grep and sed:
 
 ```bash
 make check
+```
+
+I also wrote few test scripts to make my life easier, to run these you will also
+need PCRE2, `curl`, `openssl` and `htmlq`. After obtaining these tools you can
+run the tests by running:
+
+```bash
+make test
 ```
 
 ### adding translations
@@ -107,6 +108,13 @@ pull request
 
 there are roughly 150 words to translate (maybe even less) so this should only
 take few minutes
+
+to check for any missing locales, run the `checks/locale.sh` script. This script
+requires the `yq` tool, so make sure to install it before running the script:
+
+```bash
+./checks/locale.sh
+```
 
 ### reporting issues
 

@@ -2,22 +2,65 @@
 <html lang="{{.conf.Lang}}">
   <head>
     {{template "parts/head" .}}
+    <link href="/_/css/search.css" rel="stylesheet">
   </head>
   <body>
     {{template "parts/navbar" .}}
     <main>
       {{template "parts/sidebar" .}}
       <div class="content md">
-        {{if .results}}
-          <h3>{{l "search.count" .count}}</h3>
-          <ul>
-            {{range $path, $page := .results}}
+        {{$titles_len := (len .result.titles)}}
+        {{$headings_len := (len .result.headings)}}
+        {{$tags_len := (len .result.tags)}}
+
+        {{$total := (add $titles_len $headings_len $tags_len)}}
+
+        {{if eq $total 0}}
+          <h2>{{l "search.none.title"}}</h2>
+          <p>{{l "search.none.desc"}}</p>
+        {{else}}
+          <h2>{{l "search.title" $total}}</h2>
+          <p>{{l "search.desc"}}</p>
+          {{if and (ne $titles_len 0) (ne $headings_len 0) (ne $tags_len 0)}}
+            <p>{{l "search.tip"}}</p>
+          {{end}}
+        {{end}}
+
+        {{if .result.titles}}
+          {{if .all}}
+            <h4 class="matches">{{l "search.titles" $titles_len}}</h4>
+          {{end}}
+          <ul class="titles">
+            {{range $path, $page := .result.titles}}
               <li><a href="{{$path}}">{{$page.Title}}</a></li>
             {{end}}
           </ul>
-        {{else}}
-          <h3>{{l "search.none"}}</h3>
-          <p>{{l "search.empty"}}</p>
+        {{end}}
+
+        {{if .result.headings}}
+          {{if .all}}
+            <h4 class="matches">{{l "search.headings" $headings_len}}</h4>
+          {{end}}
+          <ul class="headings">
+            {{range $path, $res := .result.headings}}
+              <li>
+                <a href="{{$path}}">
+                  {{$res.Page.Title}}: {{$res.Heading.Name}}
+                </a>
+              </li>
+            {{end}}
+          </ul>
+        {{end}}
+
+        {{if .result.tags}}
+          {{if .all}}
+            <h4 class="matches">{{l "search.tags" $tags_len}}</h4>
+          {{end}}
+          <ul class="tags">
+            {{range $path, $tag := .result.tags}}
+              <li><a href="{{$path}}">#{{$tag}}</a></li>
+            {{end}}
+          </ul>
         {{end}}
       </div>
     </main>

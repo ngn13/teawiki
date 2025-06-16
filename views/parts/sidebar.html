@@ -6,11 +6,20 @@
   <div class="search">
     <span>{{l "sidebar.search.title"}}</span>
     <form action="/_/search" method="post">
-      <input
-        name="term"
-        type="text"
-        placeholder='{{l "sidebar.search.input" .conf.Name}}'
-      >
+      {{if .term}}
+        <input
+          name="term"
+          type="text"
+          placeholder='{{l "sidebar.search.input" .conf.Name}}'
+          value="{{sanitize .term}}"
+        >
+      {{else}}
+        <input
+          name="term"
+          type="text"
+          placeholder='{{l "sidebar.search.input" .conf.Name}}'
+        >
+      {{end}}
       <button type="submit">{{l "sidebar.search.submit"}}</button>
     </form>
   </div>
@@ -19,10 +28,10 @@
     <span>{{l "sidebar.latest"}}</span>
     <div>
       {{range .repo.Latest}}
-        {{if eq $.path .}}
-          <a class="active" href="{{.}}">{{($.repo.Get .).Title}}</a>
+        {{if eq $.path .Relpath}}
+          <a class="active" href="{{.Relpath}}">{{.Title}}</a>
         {{else}}
-          <a href="{{.}}">{{($.repo.Get .).Title}}</a>
+          <a href="{{.Relpath}}">{{.Title}}</a>
         {{end}}
       {{end}}
     </div>

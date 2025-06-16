@@ -20,9 +20,26 @@ sidebar:
   content: content
 
 search:
-  count: "Listing {{.a0}} results"
-  none: No results
-  empty: There are no results for the term you have searched
+  title:
+    one: "Listing {{.a0}} result"
+    other: "Listing {{.a0}} results"
+  desc: Showing results for the term you have searched
+  tip:
+    To only search for page titles, you can use the "title:" prefix. To only
+    search for page headings, you can use the "heading:" prefix. Lastly, to only
+    search for page tags, you can use the "tag:" prefix.
+  none:
+    title: No results
+    desc: There are no results for the term you have searched
+  titles:
+    one: "{{.a0}} title match"
+    other: "{{.a0}} title matches"
+  headings:
+    one: "{{.a0}} heading match"
+    other: "{{.a0}} heading matches"
+  tags:
+    one: "{{.a0}} tag match"
+    other: "{{.a0}} tag matches"
 
 history:
   title: "Commit history for {{.a0}}"
@@ -50,6 +67,11 @@ index:
     "This the default index page. Create a page in the README.md file to change
     this page.\n\nSee the [documentation]({{.a0}}) for more information.
     \n\nThank you for using teawiki!"
+
+tag:
+  desc:
+    one: "Total of {{.a0}} page with this tag"
+    other: "Total of {{.a0}} pages with this tag"
 
 error:
   404:

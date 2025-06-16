@@ -6,6 +6,10 @@ import (
 	"github.com/ngn13/teawiki/consts"
 )
 
+func bold(msg string, f ...any) {
+	fmt.Printf(ANSI_BOLD+msg+ANSI_RESET+"\n", f...)
+}
+
 func Banner() {
 	fmt.Println()
 	bold("teawiki (%s) - simple git based wiki", consts.VERSION)

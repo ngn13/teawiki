@@ -10,6 +10,13 @@
       {{template "parts/sidebar" .}}
       <div class="content">
         <h1 class="title">{{.page.Title}}</h1>
+        {{if ne (len .page.Tags) 0}}
+          <div class="tags">
+            {{range .page.Tags}}
+              <a href="/_/tag/{{.}}">#{{.}}</a>
+            {{end}}
+          </div>
+        {{end}}
         {{if or .page.Image .page.Fields}}
         <div class="infobox">
           <span class="name">{{.page.Title}}</span>

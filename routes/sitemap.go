@@ -16,20 +16,20 @@ const (
 	SITEMAP_URL  = "http://www.sitemaps.org/schemas/sitemap/0.9"
 )
 
-type Url struct {
+type sitemap_url struct {
 	XMLName  xml.Name `xml:"url"`
 	Location string   `xml:"loc"`
 	LastMod  string   `xml:"lastmod,omitempty"`
 	Priority string   `xml:"priority,omitempty"`
 }
 
-type Urlset struct {
+type sitemap struct {
 	XMLName xml.Name `xml:"urlset"`
 	Xmlns   string   `xml:"xmlns,attr"`
-	Urls    []Url
+	Urls    []sitemap_url
 }
 
-func (s *Urlset) Add(url string, mod *time.Time, _prio ...string) {
+func (s *sitemap) Add(loc string, mod *time.Time, _prio ...string) {
 	prio := ""
 	lastmod := ""
 
@@ -41,8 +41,8 @@ func (s *Urlset) Add(url string, mod *time.Time, _prio ...string) {
 		lastmod = mod.Format(W3C_DATETIME)
 	}
 
-	s.Urls = append(s.Urls, Url{
-		Location: url,
+	s.Urls = append(s.Urls, sitemap_url{
+		Location: loc,
 		LastMod:  lastmod,
 		Priority: prio,
 	})
@@ -56,9 +56,9 @@ func GET_Sitemap(c *fiber.Ctx) error {
 		return util.NotFound(c)
 	}
 
-	set := Urlset{
+	set := sitemap{
 		Xmlns: SITEMAP_URL,
-		Urls:  []Url{},
+		Urls:  []sitemap_url{},
 	}
 
 	if rep.Index.HasHistory {
@@ -67,12 +67,12 @@ func GET_Sitemap(c *fiber.Ctx) error {
 		set.Add(conf.Url.String(), nil, "1.0")
 	}
 
-	for path, page := range rep.Pages {
-		if !page.HasHistory || path == repo.INDEX_PATH {
+	for _, page := range rep.Pages {
+		if !page.HasHistory || page.Relpath == repo.INDEX_PATH {
 			continue
 		}
 
-		fp := conf.Url.JoinPath(path).String()
+		fp := conf.Url.JoinPath(page.Relpath).String()
 		set.Add(fp, &page.LastUpdate)
 	}
 

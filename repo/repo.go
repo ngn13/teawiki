@@ -24,16 +24,19 @@ const (
 )
 
 type Repo struct {
+	// other structures
 	Config   *config.Config
 	Locale   *locale.Locale
 	Markdown *util.Markdown
 
+	// git stuff
 	Git  *git.Repository
 	Head *plumbing.Reference
 	Tree *git.Worktree
 
-	Pages   map[string]*Page
-	Latest  []string
+	// pages
+	Pages   []*Page
+	Latest  []*Page
 	Index   *Page
 	License *Page
 }
@@ -93,8 +96,8 @@ func (r *Repo) Reload() error {
 	}
 
 	// clear all the pages
-	r.Pages = make(map[string]*Page)
-	r.Latest = []string{}
+	r.Pages = []*Page{}
+	r.Latest = []*Page{}
 	r.License = nil
 	r.Index = nil
 
@@ -103,17 +106,11 @@ func (r *Repo) Reload() error {
 		return err
 	}
 
-	paths := []string{}
-
-	for path := range r.Pages {
-		paths = append(paths, path)
-	}
-
 	// sort the paths based on the pages (latest first)
-	sort.Slice(paths, func(i, j int) bool {
-		switch r.Pages[paths[i]].LastUpdate.Compare(r.Pages[paths[j]].LastUpdate) {
+	sort.Slice(r.Pages, func(i, j int) bool {
+		switch r.Pages[i].LastUpdate.Compare(r.Pages[j].LastUpdate) {
 		case 0:
-			return r.Pages[paths[j]].Title > r.Pages[paths[i]].Title
+			return r.Pages[j].Title > r.Pages[i].Title
 
 		case -1:
 			return false
@@ -123,11 +120,11 @@ func (r *Repo) Reload() error {
 	})
 
 	// create the latest updated page list
-	for i, path := range paths {
+	for i, page := range r.Pages {
 		if i >= LATEST_MAX {
 			break
 		}
-		r.Latest = append(r.Latest, path)
+		r.Latest = append(r.Latest, page)
 	}
 
 	r.License = r.Get(LICENSE_PATH)
@@ -139,4 +136,10 @@ func (r *Repo) Reload() error {
 	}
 
 	return nil
+}
+
+func (r *Repo) EachPage(f func(*Page)) {
+	for i := range r.Pages {
+		f(r.Pages[i])
+	}
 }

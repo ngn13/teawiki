@@ -11,31 +11,45 @@ import (
 const COMMIT_COUNT = 20
 
 func GET_History(c *fiber.Ctx) error {
+	rep := c.Locals("repo").(*repo.Repo)
 	n := c.QueryInt("n", 0)
 
 	if n < 0 {
 		n = 0
 	}
 
-	rep := c.Locals("repo").(*repo.Repo)
-	rp := strings.Replace(c.Path(), "/_/history", "", 1)
+	cpath := strings.TrimPrefix(c.Path(), "/_/history")
+	rpath := rep.Resolve(cpath)
 
-	path, _ := rep.Resolve(rp)
-	page := rep.Get(path)
+	// check if we failed to resolve the path
+	if rpath == "" {
+		return util.NotFound(c)
+	}
+
+	// check if the request path matches to resolved patch
+	if rpath != cpath {
+		return c.Redirect("/_/history" + rpath)
+	}
+
+	// obtain the page from the resolved path
+	page := rep.Get(rpath)
 
 	if page == nil {
 		return util.NotFound(c)
 	}
 
-	history, more := rep.History(path, n*COMMIT_COUNT, COMMIT_COUNT)
+	// get the commit history of the page
+	history, more := rep.History(rpath, n*COMMIT_COUNT, COMMIT_COUNT)
 
 	if len(history) == 0 {
 		return util.NotFound(c)
 	}
 
+	// TODO: maybe add a RSS feed to the history page?
+
 	return util.Ok(c, "history", fiber.Map{
 		"page":    page,
-		"path":    path,
+		"path":    rpath,
 		"history": history,
 		"more":    more,
 		"n":       n,

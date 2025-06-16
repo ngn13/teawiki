@@ -34,6 +34,12 @@
 {{else}}
   <link rel="icon" href="data:;base64,=">
 {{end}}
+{{if .conf.Url}}
+  <link
+    rel="search" type="application/opensearchdescription+xml"
+    title="{{.conf.Name}}" href="/opensearch.xml"
+  />
+{{end}}
 
 <link rel="stylesheet" href="/_/themes/{{.conf.Theme}}.css"/>
 <link rel="stylesheet" href="/_/css/style.css"/>

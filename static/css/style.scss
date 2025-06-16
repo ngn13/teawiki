@@ -121,6 +121,7 @@ a,
 #sidebar {
   display: flex;
   flex-direction: column;
+  max-width: 200px;
 
   justify-content: center;
   align-items: center;
@@ -144,6 +145,7 @@ a,
     span {
       font-size: 15px;
       padding-left: 10px;
+      word-wrap: break-word;
     }
 
     form,
@@ -419,8 +421,7 @@ a,
   blockquote {
     margin: 0;
     padding: 10px 10px 10px 12px;
-    border-left: 0.25em solid var(--theme-1);
-    background: var(--background-2);
+    border-left: 0.25em solid var(--theme-2);
 
     border-radius: 3px;
     margin-bottom: 10px;
@@ -428,6 +429,10 @@ a,
     > *:last-child {
       padding-bottom: 0;
       margin-bottom: 0;
+    }
+
+    * {
+      color: var(--theme-1);
     }
   }
 
@@ -500,6 +505,7 @@ a,
 
     border-spacing: 0;
     border-collapse: collapse;
+    margin-bottom: 10px;
 
     font-variant: tabular-nums;
 

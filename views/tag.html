@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="{{.conf.Lang}}">
+  <head>
+    {{template "parts/head" .}}
+  </head>
+  <body>
+    {{template "parts/navbar" .}}
+    <main>
+      {{template "parts/sidebar" .}}
+      <div class="content md">
+        <h2>#{{(sanitize .tag)}}</h2>
+        <p>{{l "tag.desc" (len .pages)}}</p>
+        <ul>
+          {{range .pages}}
+            <li><a href="{{.Relpath}}">{{.Title}}</a></li>
+          {{end}}
+        </ul>
+      </div>
+    </main>
+    {{template "parts/footer" .}}
+  </body>
+</html>
