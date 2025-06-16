@@ -30,7 +30,7 @@
           {{if .all}}
             <h4 class="matches">{{l "search.titles" $titles_len}}</h4>
           {{end}}
-          <ul>
+          <ul class="titles">
             {{range $path, $page := .result.titles}}
               <li><a href="{{$path}}">{{$page.Title}}</a></li>
             {{end}}
@@ -41,7 +41,7 @@
           {{if .all}}
             <h4 class="matches">{{l "search.headings" $headings_len}}</h4>
           {{end}}
-          <ul>
+          <ul class="headings">
             {{range $path, $res := .result.headings}}
               <li>
                 <a href="{{$path}}">
@@ -56,7 +56,7 @@
           {{if .all}}
             <h4 class="matches">{{l "search.tags" $tags_len}}</h4>
           {{end}}
-          <ul>
+          <ul class="tags">
             {{range $path, $tag := .result.tags}}
               <li><a href="{{$path}}">#{{$tag}}</a></li>
             {{end}}
