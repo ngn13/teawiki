@@ -21,7 +21,7 @@
         {{else}}
           <h2>{{l "search.title" $total}}</h2>
           <p>{{l "search.desc"}}</p>
-          {{if .all}}
+          {{if and (ne $titles_len 0) (ne $headings_len 0) (ne $tags_len 0)}}
             <p>{{l "search.tip"}}</p>
           {{end}}
         {{end}}
