@@ -74,3 +74,9 @@ jobs:
 
       - name: Headings test
         run: PATH="$PWD:$PATH" tests/run.sh headings
+
+      - name: Page tag list test
+        run: PATH="$PWD:$PATH" tests/run.sh tags
+
+      - name: Tag test
+        run: PATH="$PWD:$PATH" tests/run.sh tag
