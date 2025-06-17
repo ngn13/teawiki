@@ -5,12 +5,12 @@ urllen=${#TW_URL}
 count=0
 
 for page in ${pages[@]}; do
+  ((count++))
   [[ "${page}" == "${TW_URL}" ]] && continue
   [ ! -f "./${page:$urllen}" ] && fail
-  ((count++))
 done
 
-for file in $(find tests/content -type f -name '*.md'); do
+for file in $(find . -type f -name '*.md'); do
   ((count--))
 done
 
