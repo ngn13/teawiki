@@ -132,6 +132,8 @@ markdown:
 		if _, err = file.Seek(0, 0); err != nil {
 			return nil, fmt.Errorf("failed to seek to start: %s", err.Error())
 		}
+
+		// TODO: attempt to find and use the h1 at the start as the title
 	}
 
 	// parse the markdown content & check if it's valid
@@ -155,6 +157,7 @@ markdown:
 	// use the filename as the title if none specified
 	if page.Title == "" {
 		page.Title = path.Base(fp)
+		page.Title = strings.TrimSuffix(page.Title, PAGE_EXT)
 	}
 
 	// load headings from the parsed markdown
