@@ -53,14 +53,32 @@ func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
 		file        *os.File
 	)
 
+	// open the file
 	if file, err = os.Open(fp); err != nil {
 		return nil, err
 	}
 	defer file.Close()
 
+	// check the start sign, which is "---"
+	sign := make([]byte, 4)
+	read := 0
+
+	if read, err = file.Read(sign); err != nil {
+		return nil, err
+	}
+
+	if read != 4 {
+		return nil, fmt.Errorf("invalid page format (no metadata section)")
+	}
+
+	if string(sign) != "---\n" {
+		return nil, fmt.Errorf("invalid page format (missing metadata start section)")
+	}
+
+	// read the rest of the metadata section
 	buff := util.NewBuffer(5)
-	char := make([]byte, 1)
-	pos := int64(0)
+	char := []byte{0}
+	pos := int64(read)
 
 	for _, err = file.Read(char); err == nil; _, err = file.Read(char) {
 		pos++
@@ -69,26 +87,26 @@ func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
 			continue
 		}
 
-		if buff.String() != "\n%%%\n" {
+		if buff.String() != "\n---\n" {
 			continue
 		}
 
 		start := pos - int64(buff.Length())
 
 		if start <= 0 {
-			return nil, fmt.Errorf("invalid page format")
+			return nil, fmt.Errorf("invalid page format (missing metadata end section)")
 		}
 
 		yaml_file, _ := os.Open(fp)
 		mark_file, _ := os.Open(fp)
 
 		if yaml_reader, err = util.NewReader(yaml_file, 0, start); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to parse metadata: %s", err.Error())
 		}
 		defer yaml_reader.Close()
 
 		if mark_reader, err = util.NewReader(mark_file, pos, 0); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to parse markdown: %s", err.Error())
 		}
 		defer mark_reader.Close()
 

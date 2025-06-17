@@ -1,6 +1,6 @@
+---
 title: Aliud
-
-%%%
+---
 
 Lorem markdownum Curibusque mens lacrimis epytus, in spissa Balearica piumque
 publica stamina. Agitur et mihi Echecli qua quoque stupet; arva modo ille mansit
@@ -43,7 +43,7 @@ Stratum morer tardus os trahens! Tergo cacumina!
 > turbarat lacertis tepescunt motibus vocem idem, finitimosque fixit putat
 > cessantem! In aura, data est memini quondam, et qui.
 
-Omnis nisi *frustra ferro* adversi inpius: inque care foribus duros cupit
+Omnis nisi _frustra ferro_ adversi inpius: inque care foribus duros cupit
 **paulatim** hic ripam id intonsumque vultus est. Et verba, levor armata; ne
 ponunt enim hosti paenituisse fuit addendum deos! Animaeque ardet densis, non
 sacra, sua habet digitos? Iovi index, videri; et habet, primae praecipitant.

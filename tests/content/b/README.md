@@ -1,6 +1,6 @@
+---
 title: bellis
-
-%%%
+---
 
 Lorem markdownum oravique esset et ordine, secura, purpura late at armiger sibi
 innumeras condiderant credas Idaeis, magna. Et fortuna quaesita coniunx summo
@@ -12,12 +12,12 @@ pia erat, tollit figura totum; rictuque.
 
 ## Potita virginibus sacrata hinnitibus Aurora est regnat
 
-Nec facta in amor Cereri Lycaeo. Et oculis fertur, quoque exanimem *relinquit*
+Nec facta in amor Cereri Lycaeo. Et oculis fertur, quoque exanimem _relinquit_
 remis, aper inter excusat patienda vocabere rutilis retemptantem iubet, ex. Fuit
-*illic* quam non; est ait coniunctaque ruunt decipit. Erat albentibus **ille**;
+_illic_ quam non; est ait coniunctaque ruunt decipit. Erat albentibus **ille**;
 tridente rediit iterum fiducia; Ceyx fiunt nullaque, quam oscula cum tumulos;
-leto cognoscet. Manusque quam tempore herbis auras Andraemone [metus
-secreta](http://www.visus-flet.net/sunt) capillis exclamo!
+leto cognoscet. Manusque quam tempore herbis auras Andraemone
+[metus secreta](http://www.visus-flet.net/sunt) capillis exclamo!
 
 - Media si saepe saucius iam dixit neque
 - Inter viri
@@ -26,13 +26,13 @@ secreta](http://www.visus-flet.net/sunt) capillis exclamo!
 
 ## Haud latius potentia
 
-Fratre **esto Ciconum**, lectum vertuntur exit subsidere, considerat *petit*,
+Fratre **esto Ciconum**, lectum vertuntur exit subsidere, considerat _petit_,
 sceptro. **Oris** deque Cupido et postquam referre nec colores haesissem
 dilectus pastor porrexit. Diu traxere!
 
-Et *et multoque annisque*. Tenus solus sinuatus, **Hectora** attonitos hostem
+Et _et multoque annisque_. Tenus solus sinuatus, **Hectora** attonitos hostem
 Taenaria video. Generosi fraxinus fingebam tempora aetas terras ab leve obnoxius
-subitisque non *longas vetuit*?
+subitisque non _longas vetuit_?
 
 Pars grandine non est constituit, pedem nec oscula parte est. Fratres in matrem
 per excussaque denique; contrahit illuc versavitque animoque praeponere

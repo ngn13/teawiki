@@ -1,12 +1,12 @@
+---
 title: Bellaque
 tags:
   - example
   - lorem
-
-%%%
+---
 
 Lorem markdownum grata tauros cum riguo meas, classis undis non sederunt tuens
-*ubi*, mota morte sati regione. Medio perfringit ruunt sparsit simplicitas
+_ubi_, mota morte sati regione. Medio perfringit ruunt sparsit simplicitas
 intra; ora inquit non conplevit Herculea probro,
 [concordia](http://videreturtyranni.io/per.html). Querella mandat, sepulcrum
 blandis: molle [iam nec](http://fluens-patent.org/circueunt) arma non sanguis
@@ -15,8 +15,9 @@ potest, vitiataque admotas est tamen!
 ## Arida puppis in foret multae visam visa
 
 Lucifer rostrum recludam; mora sine si parenti desunt, nec et, arva. Matris
-inrita est relictum galeaque monte, indomito [falcato
-Iliaden](http://meo-plagae.net/ex) mixtoque, quorum caespite. Iam rigidi.
+inrita est relictum galeaque monte, indomito
+[falcato Iliaden](http://meo-plagae.net/ex) mixtoque, quorum caespite. Iam
+rigidi.
 
 1. Verti decertare genus cristati armatur narres suo
 2. Nuntiet trahens quamquam profitemur de modo quo
@@ -43,6 +44,6 @@ micant victrix vincla. Nec mactatos Quirini magna sanguine sola livor! Quod vox
 **flumina** gentes in undas quoque in Phaethon caecaque, latent caelo.
 
 Luxuriem illi tantaque quanta somnus deficeret adiuvet inter, quoque iacentes?
-Domos me mihi poscor sena *forti inscribenda* utere, pugnat inque; mihi solum
+Domos me mihi poscor sena _forti inscribenda_ utere, pugnat inque; mihi solum
 sagax, erat inquit! Has sub quot ictus et cunctari non capiat minis, Apollo. Vix
 superest, consortia nubibus lenius.

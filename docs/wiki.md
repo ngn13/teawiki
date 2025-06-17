@@ -5,20 +5,7 @@ of your wiki, this documentation explains how you can setup this repo
 
 ## creating pages
 
-after initializing an empty git repo, you can start creating pages
-
-you can think about a "page" as a single article, each page is just a single
-file, and all the pages use the `.md` (markdown) extension
-
-however the pages are not ordinary markdown files, each page contains two
-different sections
-
-the first section is the "metadata" section, it contains information about the
-page itself, and the second section is the "content" section, which contains
-actual page contents
-
-the section are split by using `%%%`, which should come after a newline, and it
-should be followed by another newline
+TODO: update this section
 
 ### metadata
 

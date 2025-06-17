@@ -1,6 +1,6 @@
+---
 title: Blandis
-
-%%%
+---
 
 Lorem markdownum quid o saepe indutus, multorum et lacrimantia tibique. Tantum
 praesepibus aquas **pudetque quoque** possum, Daedale erat. Ulla
@@ -23,7 +23,7 @@ Pactolonque hic exclamo nostri!
 
 Est sede nocti incubat etenim; nec tantum tamen, scire morsus poterat
 [subito](http://me.org/longo) ferit opus quaerant; et! Maduere a ne Gortyniaco
-ferrem. Hoc *poma ter* intraque dentes sumptis quercus perque: exclamat ossaque
+ferrem. Hoc _poma ter_ intraque dentes sumptis quercus perque: exclamat ossaque
 pater manes date euntem.
 
     queue.digitalManagementIcf += reality_vdu_pptp(copyrightIscsiFsb(99) +
@@ -34,20 +34,20 @@ pater manes date euntem.
     windows -= bitmap(class_drive_impact(golden) - 72, thermistorPpcThunderbolt,
             reality_rt * sidebarVdu + softwareKeylogger);
 
-Undas patria draconis ad aratro *Clytumque cessent conchae* incaluit nullis et
+Undas patria draconis ad aratro _Clytumque cessent conchae_ incaluit nullis et
 et nullo tantusque arboribus at insere quaeque. Auxilium quos commemorare rura
-humanum, flebile: cum non partes et erat. Gloria *ossa ingens Graiosque* expulit
+humanum, flebile: cum non partes et erat. Gloria _ossa ingens Graiosque_ expulit
 descendunt orbem ex ergo exuritque inquit lumina gregibus inplicet ossaque
-habebas, et? Gratata fertur volentem *Hac* dirusque eventus petitum Achivae
+habebas, et? Gratata fertur volentem _Hac_ dirusque eventus petitum Achivae
 curam soli iuventus hominumque: misso alta tune.
 
-Latebris mihi sparsas corpora, crescit corniger. *Membra* tecum
+Latebris mihi sparsas corpora, crescit corniger. _Membra_ tecum
 [tremulo](http://aliisque-fontis.com/tecum-mercurio.html) haeserat flumina
 thalamos offensa **eruiturque**, sua armenta, **fameque**.
 
 Esse saecula, vel potest glaebis umeris: vides suum delenda habebant imagine
 perspexerat, concava. Dubitor vulnere locuta haud, auctore vitare? Manes quoque
-*deam quantumque ora* nocet, sinit purpureum artus venerat genitor ab animal
+_deam quantumque ora_ nocet, sinit purpureum artus venerat genitor ab animal
 exstant. Natura indefessus ab quae si data **violata**, vicimus languentique
 camini [excute](http://exuritque-iuvenalia.org/comadoleam) femina quae sontem et
 rite inde oris. Crescitque Cypro.
