@@ -26,6 +26,14 @@ var headings = []string{
 	"h1", "h2", "h3", "h4", "h5",
 }
 
+func nodeText(node *html.Node) string {
+	for nil != node.FirstChild {
+		node = node.FirstChild
+	}
+
+	return node.Data
+}
+
 func findAttr(node *html.Node, name string) string {
 	for i := range node.Attr {
 		if node.Attr[i].Key == name {
@@ -57,7 +65,7 @@ func parseNode(node *html.Node, root *[]*Heading, cur *Heading) *Heading {
 	}
 
 	heading := &Heading{
-		Name:     node.FirstChild.Data,
+		Name:     nodeText(node),
 		ID:       id,
 		Depth:    depth,
 		Parent:   nil,

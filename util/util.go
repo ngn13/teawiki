@@ -3,12 +3,29 @@ package util
 import (
 	"fmt"
 	"html/template"
+	"io"
 	"net/url"
 	"os"
 	"strconv"
 	"strings"
 	"time"
 )
+
+func ReadUntil(r io.Reader, u byte) (buff []byte, err error) {
+	char := make([]byte, 1)
+
+	for {
+		if _, err = r.Read(char); err != nil {
+			return nil, err
+		}
+
+		if char[0] == u {
+			return buff, nil
+		}
+
+		buff = append(buff, char[0])
+	}
+}
 
 func Exists(path string) bool {
 	_, err := os.Stat(path)

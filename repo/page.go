@@ -46,68 +46,78 @@ func (p *Page) Path(id ...string) string {
 	return fmt.Sprintf("%s#%s", p.Relpath, id[0])
 }
 
-func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
+func (r *Repo) loadPage(fp string, defaults ...string) (*Page, error) {
 	var (
-		yaml_reader *util.Reader
-		mark_reader *util.Reader
-		file        *os.File
+		reader *util.Reader = nil
+		buffer *util.Buffer = nil
+
+		file *os.File = nil
+		page Page
+
+		pos int64 = 0
+		err error = nil
 	)
 
+	// open the file
 	if file, err = os.Open(fp); err != nil {
 		return nil, err
 	}
 	defer file.Close()
 
-	buff := util.NewBuffer(5)
-	char := make([]byte, 1)
-	pos := int64(0)
+	// create the buffer
+	buffer = util.NewBuffer(5)
 
-	for _, err = file.Read(char); err == nil; _, err = file.Read(char) {
+	// check for the metadata section
+	if err = buffer.From(file, 4); err != nil {
+		log.Debg("failed to read start of metadata in %s: %s", fp, err.Error())
+		goto markdown
+	}
+
+	if buffer.String() != "---\n" {
+		log.Debg("%s is missing metadata start sign", fp)
+		goto markdown
+	}
+
+	// read the rest of the metadata section
+	pos = int64(buffer.Len())
+	buffer.Clear()
+
+	for {
+		if err = buffer.From(file, 1); err != nil {
+			log.Debg("cannot read byte from %s: %s", fp, err.Error())
+			break
+		}
+
 		pos++
 
-		if buff.Push(char[0]) != buff.Length() {
+		if buffer.String() != "\n---\n" {
 			continue
 		}
 
-		if buff.String() != "\n%%%\n" {
-			continue
-		}
-
-		start := pos - int64(buff.Length())
+		start := pos - int64(buffer.Len())
 
 		if start <= 0 {
-			return nil, fmt.Errorf("invalid page format")
+			log.Debg("missing metadata section in %s", fp)
+			break
 		}
 
-		yaml_file, _ := os.Open(fp)
-		mark_file, _ := os.Open(fp)
-
-		if yaml_reader, err = util.NewReader(yaml_file, 0, start); err != nil {
-			return nil, err
+		if reader, err = util.NewReader(file, 0, start); err != nil {
+			log.Debg("failed to create reader for %s: %s", fp, err.Error())
+			break
 		}
-		defer yaml_reader.Close()
-
-		if mark_reader, err = util.NewReader(mark_file, pos, 0); err != nil {
-			return nil, err
-		}
-		defer mark_reader.Close()
+		defer reader.Close()
 
 		break
 	}
 
-	if mark_reader == nil || yaml_reader == nil {
-		return nil, fmt.Errorf("failed to parse the page")
+	if reader == nil {
+		log.Debg("%s is missing metada, no reader created", fp)
+		goto markdown
 	}
-
-	page = &Page{}
 
 	// parse the YAML metadata & check if it's valid
-	if err = yaml.NewDecoder(yaml_reader).Decode(page); err != nil {
+	if err = yaml.NewDecoder(reader).Decode(&page); err != nil {
 		return nil, err
-	}
-
-	if page.Title == "" {
-		return nil, fmt.Errorf("page title is not specified")
 	}
 
 	for _, tag := range page.Tags {
@@ -116,8 +126,55 @@ func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
 		}
 	}
 
+markdown:
+	tried_heading := false
+
+	// if no metadata is read, check if file starts with a heading that we can use
+	// as a title
+
+	// if so read it and parse the rest of the file as markdown, if not seek to
+	// start of file to parse it all as markdown
+	for reader == nil {
+		// seek to the start
+		if _, err = file.Seek(0, 0); err != nil {
+			return nil, fmt.Errorf("failed to seek to start: %s", err.Error())
+		}
+
+		// did we already try to read the h1 heading?
+		if tried_heading {
+			break
+		}
+
+		// check if the page starts with h1 heading
+		buffer.Clear()
+
+		if err = buffer.From(file, 2); err != nil {
+			log.Debg("failed to check for h1 heading in %s: %s", fp, err.Error())
+			tried_heading = true
+			continue
+		}
+
+		if buffer.String() != "# " {
+			log.Debg("%s is missing a h1 heading for title", fp)
+			tried_heading = true
+			continue
+		}
+
+		// read the heading and use it as the page title
+		var heading []byte
+
+		if heading, err = util.ReadUntil(file, '\n'); err != nil {
+			log.Debg("failed to read h1 heading in %s: %s", fp, err.Error())
+			tried_heading = true
+			continue
+		}
+
+		page.Title = string(heading)
+		break
+	}
+
 	// parse the markdown content & check if it's valid
-	page.Content = string(r.Markdown.Render(mark_reader))
+	page.Content = string(r.Markdown.Render(file))
 
 	if page.Content == "" {
 		return nil, fmt.Errorf("empty page content")
@@ -134,10 +191,16 @@ func (r *Repo) loadPage(fp string, defaults ...string) (page *Page, err error) {
 		page.LastUpdate = time.Unix(0, 0)
 	}
 
+	// use the filename as the title if none specified
+	if page.Title == "" {
+		page.Title = path.Base(fp)
+		page.Title = strings.TrimSuffix(page.Title, PAGE_EXT)
+	}
+
 	// load headings from the parsed markdown
 	page.Headings = Headings(page.Content)
 
-	return page, nil
+	return &page, nil
 }
 
 func (r *Repo) newPage(title string, content string) *Page {

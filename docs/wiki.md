@@ -3,36 +3,70 @@
 to actually use teawiki, you'll need a git repo that will contain all the pages
 of your wiki, this documentation explains how you can setup this repo
 
+## creating a git repo
+
+i'm not gonna walk you through the basics of git or anything, if you want to use
+teawiki, you are most likely already familiar with git (otherwise why even use a
+wiki that's literally built for creating wikis with git?)
+
+all the content of your wiki (pages, images etc.) will be contained in a single
+repository, which you can simply create with `git init`. You do not need any
+other setup, your entire wiki is literally stored in a single, standard git repo
+
+in this repo you can create directories, files etc. Teawiki only treats markdown
+files with `.md` extension as pages and that's pretty much it, anything else
+will be served as a static file, and they will be accessible with their relative
+paths
+
 ## creating pages
 
-after initializing an empty git repo, you can start creating pages
+pages are simply markdown files, with optional metadata. Metadata let's you
+change the page title, let's you add different tags and let's you create simple
+infoboxes (all of which are covered later in this document)
 
-you can think about a "page" as a single article, each page is just a single
-file, and all the pages use the `.md` (markdown) extension
+the metadata is stored inside a "leaf block", which basically a text block
+contained inside two `---` separators. This block is located at the start of the
+file
 
-however the pages are not ordinary markdown files, each page contains two
-different sections
+so basically a page with has the following format:
 
-the first section is the "metadata" section, it contains information about the
-page itself, and the second section is the "content" section, which contains
-actual page contents
+```md
+---
+(metadata here)
+---
 
-the section are split by using `%%%`, which should come after a newline, and it
-should be followed by another newline
+(content here)
+```
+
+If you ever used [Hugo](https://gohugo.io/) or some other program that uses the
+[goldmark-meta](https://github.com/yuin/goldmark-meta) extension, you might have
+already seen this syntax (to be clear, teawiki does not use goldmark)
 
 ### metadata
 
-page metadata is formatted with YAML, and it can contain few different keys, but
-the most important (and only required) key is the `title` key, this key
-specifies the title of the page, here is an example:
+page metadata is formatted with YAML, and it can contain few different keys
+
+the most important one (and the one you'll mostly likely wanna use in every
+page) is the `title` key. This key let's you specify a title for your page. Here
+is an example:
 
 ```yaml
 title: i386
 ```
 
-you can also specify multiple tags for a page, users can click on these tags to
-view pages with the same tags and they can also search for these tags, which
-makes it easier for users to discover similar pages:
+**if no title is specified**, teawiki will check if the markdown content starts
+with a h1 heading (heading with a single `#`). If so, the contents of the
+heading (plain text contents, not rendered) will be used as the title and as a
+result the heading will not be rendered as a part of the markdown content
+
+**if no such heading exists**, teawiki will just use the file name as the title
+after removing the `.md` extension. So if the markdown file has the name
+`hello_world.md`, the page will have the title `hello_world`
+
+another key is the `tags` key, which let's you specify a list of tags for a
+page. Users can see these tags right under the title of the page, and click on
+them to view pages with the same tags. They can also search for these tags,
+which makes it easier for users to discover similar pages:
 
 ```yaml
 tags:
@@ -83,7 +117,7 @@ this looks like:
 
 ### content
 
-actual content of the pages is formatted with markdown, the markdown renderer
+actual content of the pages is formatted with markdown. The markdown renderer
 teawiki uses, [blackfriday](https://github.com/russross/blackfriday), supports
 multiple extensions that are enabled:
 
@@ -104,7 +138,7 @@ multiple extensions that are enabled:
 
 please note that these extensions are not part of the
 [CommonMark standart](https://commonmark.org/), you should avoid using these if
-you want your wiki to stay compatible with other markdown processors
+you want your wiki pages to stay compatible with other markdown processors
 
 ## special pages
 
@@ -128,8 +162,8 @@ to access it from anywhere
 
 ## other static content
 
-anything that is not a page, will be served as a static file without any
-rendering whatsoever
+as explained in the first section, anything that is not a page, will be served
+as a static file without any rendering whatsoever
 
 this means you can access & link all the images and other static content,
 directly from the markdown content
