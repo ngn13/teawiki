@@ -127,13 +127,50 @@ func (r *Repo) loadPage(fp string, defaults ...string) (*Page, error) {
 	}
 
 markdown:
-	// if no metadata is read, seek to start of file to parse it all as markdown
-	if reader == nil {
+	tried_heading := false
+
+	// if no metadata is read, check if file starts with a heading that we can use
+	// as a title
+
+	// if so read it and parse the rest of the file as markdown, if not seek to
+	// start of file to parse it all as markdown
+	for reader == nil {
+		// seek to the start
 		if _, err = file.Seek(0, 0); err != nil {
 			return nil, fmt.Errorf("failed to seek to start: %s", err.Error())
 		}
 
-		// TODO: attempt to find and use the h1 at the start as the title
+		// did we already try to read the h1 heading?
+		if tried_heading {
+			break
+		}
+
+		// check if the page starts with h1 heading
+		buffer.Clear()
+
+		if err = buffer.From(file, 2); err != nil {
+			log.Debg("failed to check for h1 heading in %s: %s", fp, err.Error())
+			tried_heading = true
+			continue
+		}
+
+		if buffer.String() != "# " {
+			log.Debg("%s is missing a h1 heading for title", fp)
+			tried_heading = true
+			continue
+		}
+
+		// read the heading and use it as the page title
+		var heading []byte
+
+		if heading, err = util.ReadUntil(file, '\n'); err != nil {
+			log.Debg("failed to read h1 heading in %s: %s", fp, err.Error())
+			tried_heading = true
+			continue
+		}
+
+		page.Title = string(heading)
+		break
 	}
 
 	// parse the markdown content & check if it's valid

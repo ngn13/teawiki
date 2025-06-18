@@ -6,26 +6,7 @@ configuration easy for deployment with docker compose
 all the environment variable that are used for configuration use the `TW_`
 prefix, any other environment variable will not effect the configuration
 
-here is a list of all the available options:
-
-- [`TW_DEBUG`](#tw_debug)
-- [`TW_LISTEN` (required)](#tw_listen-required)
-- [`TW_URL`](#tw_url)
-- [`TW_NAME` (required)](#tw_name-required)
-- [`TW_DESC` (required)](#tw_desc-required)
-- [`TW_KEYWORDS`](#tw_keywords)
-- [`TW_SOURCE_URL`](#tw_source_url)
-- [`TW_COMMIT_URL`](#tw_commit_url)
-- [`TW_REPO_PATH` (required)](#tw_repo_path-required)
-- [`TW_REPO_URL`](#tw_repo_url)
-- [`TW_RELOAD_INTERVAL`](#tw_reload_interval)
-- [`TW_WEBHOOK_SECRET`](#tw_webhook_secret)
-- [`TW_CHROMA`](#tw_chroma)
-- [`TW_THEME` (required)](#tw_theme-required)
-- [`TW_LANG`](#tw_lang)
-- [`TW_TIME`](#tw_time)
-- [`TW_LOGO`](#tw_logo)
-- [`TW_ICON`](#tw_icon)
+this document contains lists all the available configuration options
 
 ## `TW_DEBUG`
 
