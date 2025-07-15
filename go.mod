@@ -3,7 +3,7 @@ module github.com/ngn13/teawiki
 go 1.24.5
 
 require (
-	github.com/alecthomas/chroma/v2 v2.18.0
+	github.com/alecthomas/chroma/v2 v2.19.0
 	github.com/go-git/go-git/v5 v5.16.2
 	github.com/goccy/go-yaml v1.18.0
 	github.com/gofiber/fiber/v2 v2.52.8
@@ -12,8 +12,8 @@ require (
 	github.com/ngn13/ortam v0.0.0-20250421004351-8dea81680817
 	github.com/nicksnyder/go-i18n/v2 v2.6.0
 	github.com/russross/blackfriday/v2 v2.1.0
-	golang.org/x/net v0.41.0
-	golang.org/x/text v0.26.0
+	golang.org/x/net v0.42.0
+	golang.org/x/text v0.27.0
 )
 
 require (
@@ -47,7 +47,7 @@ require (
 	github.com/valyala/fasthttp v1.51.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
-	golang.org/x/crypto v0.39.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/crypto v0.40.0 // indirect
+	golang.org/x/sys v0.34.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
