@@ -1,6 +1,6 @@
 module github.com/ngn13/teawiki
 
-go 1.24.4
+go 1.24.5
 
 require (
 	github.com/alecthomas/chroma/v2 v2.18.0
