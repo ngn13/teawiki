@@ -6,7 +6,7 @@ require (
 	github.com/alecthomas/chroma/v2 v2.19.0
 	github.com/go-git/go-git/v5 v5.16.2
 	github.com/goccy/go-yaml v1.18.0
-	github.com/gofiber/fiber/v2 v2.52.8
+	github.com/gofiber/fiber/v2 v2.52.9
 	github.com/gofiber/template/html/v2 v2.1.3
 	github.com/microcosm-cc/bluemonday v1.0.27
 	github.com/ngn13/ortam v0.0.0-20250421004351-8dea81680817
